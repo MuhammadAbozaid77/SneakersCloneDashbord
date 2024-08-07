@@ -22,6 +22,9 @@ body {
 .titleColor {
   color: #062965;
 }
+.titleColorBack {
+  background-color: #062965;
+}
 
 .darkBlue {
   background-color: #020f25;

@@ -1,5 +1,6 @@
 import PageContainer from "../../components/ui/PageContainer";
 import SpinnerLoading from "../../components/ui/SpinnerLoading";
+import TableRows from "./components/TableRows";
 
 export default function Jordan() {
   // <SpinnerLoading />
@@ -15,6 +16,9 @@ export default function Jordan() {
             </button>
           </div>
         </div>
+      </PageContainer>
+      <PageContainer>
+        <TableRows />
       </PageContainer>
     </>
   );
