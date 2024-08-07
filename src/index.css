@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navLinkes .active {
+  background-color: #e0e0e0;
+}
+
+body {
+  font-family: "Cairo", sans-serif;
+}
+
+.spinnerColor {
+  background-color: #003a91;
+}
+.spinnerHoverColor:hover {
+  background-color: #0049d7;
+}
+
+.titleColor {
+  color: #062965;
+}
+
+.darkBlue {
+  background-color: #020f25;
+}
