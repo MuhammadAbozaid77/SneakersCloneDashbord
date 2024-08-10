@@ -3,8 +3,13 @@ import { sidebarNav } from "../../data/header";
 import LogoCompo from "./LogoCompo";
 import { LuLogOut } from "react-icons/lu";
 import { FaCircleUser } from "react-icons/fa6";
+import useLogout from "../../hooks/useLogout";
 
 export default function Sidebar() {
+  const { mutateLogout } = useLogout();
+  const handelLogout = () => {
+    mutateLogout();
+  };
   return (
     <>
       <div className="w-[350px] lg:flex justify-between flex-col hidden bg-white h-[100%] overflow-y-auto border-r ">
@@ -38,7 +43,10 @@ export default function Sidebar() {
               </NavLink>
             </li>
 
-            <li className="darkBlue  text-white navLinkes flex justify-start items-center  p-3">
+            <li
+              className="darkBlue  text-white navLinkes flex justify-start items-center  p-3"
+              onClick={handelLogout}
+            >
               <LuLogOut size={30} />
               <span className="font-semibold block mx-2 text-[18px]">
                 Logout

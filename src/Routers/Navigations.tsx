@@ -8,6 +8,8 @@ import FootballShoes from "../pages/FootballShoes/FootballShoes";
 import Profile from "../pages/Profile/Profile";
 import Login from "../pages/Auth/Login";
 import PageNotFound from "../components/ui/PageNotFound";
+import ProtectedRouting from "./ProtectedRouting";
+import JordanDetails from "../pages/Jordan/JordanDetails";
 // import PageNotFound from "../components/ui/PageNotFound";
 
 export default function Navigations() {
@@ -15,10 +17,17 @@ export default function Navigations() {
     <>
       <Routes>
         <Route path="*" element={<PageNotFound />} />
-        <Route element={<AppLayout />}>
+        <Route
+          element={
+            <ProtectedRouting>
+              <AppLayout />
+            </ProtectedRouting>
+          }
+        >
           <Route index element={<Navigate replace to="home" />} />
           <Route path="home" element={<Home />} />
           <Route path="jordan" element={<Jordan />} />
+          <Route path="jordan/jordandetails/:id" element={<JordanDetails />} />
           <Route path="sneakrs" element={<Sneakrs />} />
           <Route path="runningShoes" element={<RunningShoes />} />
           <Route path="footballShoes" element={<FootballShoes />} />
