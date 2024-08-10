@@ -24,7 +24,7 @@ export default function Jordan() {
         <TableRows />
       </PageContainer>
 
-      {showAddNew && <AddNewItem />}
+      {showAddNew && <AddNewItem onClose={() => setShowAddNew(false)} />}
     </>
   );
 }
