@@ -1,15 +1,16 @@
 import { useForm } from "react-hook-form";
 import FormInput from "../../../../components/ui/FormInput";
+import useAddNewJordan from "../../../../hooks/jordanHooks/useAddNewJordan";
 
 export default function AddNewItem({ onClose }) {
+  const { isLoading, mutateAddNewJordan } = useAddNewJordan({ onClose });
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
   const handelSubmitFun = (values) => {
-    // mutateLogin(values)g;
-    console.log(values);
+    mutateAddNewJordan(values);
   };
 
   return (
@@ -28,13 +29,30 @@ export default function AddNewItem({ onClose }) {
               Add New Jordan
             </h1>
           </div>
-          <FormInput label={"productName"} error={errors?.productName?.message}>
+          <FormInput label={"ProductName"} error={errors?.productName?.message}>
             <input
               className="border p-2 w-[100%] rounded-md text-gray-500 text-[18px]"
               type="text"
               id="productName"
               {...register("productName", {
                 required: "This Product Name Is Required",
+              })}
+            />
+          </FormInput>
+          <FormInput
+            label={"ImageFolder Name"}
+            error={errors?.folderName?.message}
+          >
+            <input
+              className="border p-2 w-[100%] rounded-md text-gray-500 text-[18px]"
+              type="text"
+              id="folderName"
+              {...register("folderName", {
+                required: "This Image Folder Name Is Required",
+                pattern: {
+                  value: /^[A-Za-z]+$/,
+                  message: "No Space Among Text",
+                },
               })}
             />
           </FormInput>
@@ -52,7 +70,7 @@ export default function AddNewItem({ onClose }) {
             />
           </FormInput>
           <FormInput
-            label={"productDescripition"}
+            label={"Descripition"}
             error={errors?.productDescripition?.message}
           >
             <textarea
@@ -70,6 +88,7 @@ export default function AddNewItem({ onClose }) {
             <input
               className="border p-2 w-[100%] rounded-md text-gray-500 text-[18px]"
               type="file"
+              multiple={true}
               id="productImages"
               {...register("productImages", {
                 required: "This Product Images Is Required",
@@ -79,7 +98,12 @@ export default function AddNewItem({ onClose }) {
 
           <button
             type="submit"
-            className="border p-2 mt-[20px] w-[100%] rounded-md text-white spinnerColor spinnerHoverColor duration-150 text-[18px]"
+            disabled={isLoading}
+            className={`border p-2 mt-[20px] w-[100%] rounded-md text-white  duration-150 text-[18px] ${
+              isLoading
+                ? "disabled:bg-gray-500"
+                : "spinnerColor spinnerHoverColor"
+            }`}
           >
             Add New Item
           </button>

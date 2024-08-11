@@ -9,14 +9,14 @@ export default function useLogin() {
     error,
     isLoading,
     mutate: mutateLogin,
-    data: user,
   } = useMutation({
     mutationFn: loginFunction,
-    onSuccess: () => {
-      localStorage.setItem("userToken", user?.accessToken);
+    onSuccess: (data) => {
+      localStorage.setItem("userToken", data?.accessToken);
       toast.success("Logging Successfuly");
       navigate("/home");
     },
   });
+
   return { mutateLogin, isLoading, error };
 }

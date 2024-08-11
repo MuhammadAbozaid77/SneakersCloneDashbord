@@ -57,20 +57,30 @@ export async function GetJordanImages(argsFolderName) {
 }
 
 /* -------------------------------  Create Jordan  --------------------------- */
-export async function createJordanItem(newJordanItem) {
+export async function addNewJordanItem({
+  productImages,
+  folderName,
+  productName,
+  productDescripition,
+  productPrice,
+}) {
   try {
-    // await createJordanFolderImage(newJordanItem);
-    await addDoc(jordanCollection, newJordanItem);
+    await createJordanFolderImage(folderName, productImages);
+    await addDoc(jordanCollection, {
+      folderName,
+      productName,
+      productDescripition,
+      productPrice,
+    });
   } catch (error) {
     throw new Error("Cant Craeted New Jordan");
   }
 }
 /* -------------------------------  Create Jordan Folder Image --------------------------- */
-export async function createJordanFolderImage({ folderName, folderImage }) {
+export async function createJordanFolderImage(folderName, productImages) {
   try {
     const storageRef = ref(firebaseStorage, `${folderName}/`);
-
-    const uploadPromises = Array.from(folderImage).map(async (image) => {
+    const uploadPromises = Array.from(productImages).map(async (image) => {
       const imageRef = ref(storageRef, `${image?.name}`);
       await uploadBytes(imageRef, image);
       await Promise.all(uploadPromises);
@@ -81,18 +91,17 @@ export async function createJordanFolderImage({ folderName, folderImage }) {
 }
 
 /* -------------------------------  Delete Jordan Item --------------------------- */
-export async function deleteJordanItem({ imageFolderName, id }) {
+export async function deleteJordanItem({ folderName, id }) {
   try {
-    await deleteFolderImage(imageFolderName);
-
+    await deleteFolderImage(folderName);
     const docObject = doc(db, "jordan", id);
     try {
       await deleteDoc(docObject);
     } catch (error) {
-      throw new Error("Cant Delete This Cabin");
+      throw new Error("Cant Delete Item");
     }
   } catch (error) {
-    console.error("Error deleting Item:", error);
+    throw new Error("Error Deleting Item:", error);
   }
 }
 

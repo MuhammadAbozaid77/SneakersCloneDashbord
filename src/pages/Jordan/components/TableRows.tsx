@@ -1,11 +1,17 @@
-import { useNavigate } from "react-router-dom";
-import { FaUserEdit, FaTrash } from "react-icons/fa";
+import useGetJordan from "../../../hooks/jordanHooks/useGetJordan";
+import SpinnerLoading from "../../../components/ui/SpinnerLoading";
+import TableItem from "./TableItem";
 
 export default function TableRows() {
-  const navigate = useNavigate();
-  const handelNavigate = () => {
-    navigate("/jordan/jordandetails/55");
-  };
+  const { isLoading, error, jordansData } = useGetJordan();
+
+  if (isLoading) {
+    return <SpinnerLoading />;
+  }
+  if (error) {
+    <> "Error" </>;
+  }
+
   return (
     <>
       <div className="p-5">
@@ -18,49 +24,20 @@ export default function TableRows() {
                 </th>
 
                 <th scope="col" className="px-6 py-3">
-                  Category
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Color
-                </th>
-                <th scope="col" className="px-6 py-3">
                   Price
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Offer
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  <span className="mx-2">
-                    <FaUserEdit />
-                  </span>
                   Edit
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  <span className="mx-2">
-                    <FaTrash />
-                  </span>
                   Delete
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr
-                onClick={handelNavigate}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 cursor-pointer"
-              >
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  Apple MacBook Pro 17"
-                </th>
-                <td className="px-6 py-4">Silver</td>
-                <td className="px-6 py-4">Laptop</td>
-                <td className="px-6 py-4">$2999</td>
-                <td className="px-6 py-4">offer</td>
-                <td className="px-6 py-4">edit</td>
-                <td className="px-6 py-4">delete</td>
-              </tr>
+              {jordansData?.map((el, index) => (
+                <TableItem item={el} key={index} />
+              ))}
             </tbody>
           </table>
         </div>
