@@ -27,7 +27,10 @@ export default function Navigations() {
           <Route index element={<Navigate replace to="home" />} />
           <Route path="home" element={<Home />} />
           <Route path="jordan" element={<Jordan />} />
-          <Route path="jordan/jordandetails/:id" element={<JordanDetails />} />
+          <Route
+            path="jordan/jordandetails/:id/:folderName"
+            element={<JordanDetails />}
+          />
           <Route path="sneakrs" element={<Sneakrs />} />
           <Route path="runningShoes" element={<RunningShoes />} />
           <Route path="footballShoes" element={<FootballShoes />} />

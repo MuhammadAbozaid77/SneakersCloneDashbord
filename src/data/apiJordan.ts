@@ -34,14 +34,13 @@ export async function getJordanData() {
   }
 }
 /* -------------------------------  Get Jordan Images --------------------------- */
-export async function GetJordanImages(argsFolderName) {
+export async function GetJordanImages({ folderName }) {
   try {
-    const folderRef = ref(firebaseStorage, `${argsFolderName}/`);
+    const folderRef = ref(firebaseStorage, `${folderName}/`);
     const res = await listAll(folderRef);
-    //
     const imageUrls = [];
     //
-    for (const itemRef of res.items) {
+    for (const itemRef of res?.items) {
       const url = await getDownloadURL(itemRef);
       imageUrls.push(url);
     }

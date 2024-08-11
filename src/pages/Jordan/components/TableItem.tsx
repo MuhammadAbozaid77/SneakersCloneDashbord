@@ -8,7 +8,7 @@ export default function TableItem({ item }) {
   const [showDeleteModal, setShowDeleteModal] = useState(null);
   const navigate = useNavigate();
   const handelNavigate = () => {
-    navigate("/jordan/jordandetails/55");
+    navigate(`/jordan/jordandetails/${item?.id}/${item?.folderName}`);
   };
 
   return (

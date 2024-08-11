@@ -1,7 +1,12 @@
+import { useParams } from "react-router-dom";
 import PageContainer from "../../components/ui/PageContainer";
-import picc from "./../../assets/logo.jpg";
+import useGetImageDetails from "../../hooks/jordanHooks/useGetImageDetails";
 
 export default function JordanDetails() {
+  const { folderName, id } = useParams();
+
+  const { isLoading, jordansImages, error } = useGetImageDetails(folderName);
+
   return (
     <>
       <PageContainer>
@@ -19,19 +24,22 @@ export default function JordanDetails() {
             </div>
           </div>
           <div className="">
-            <div className="border flex justify-center items-center h-[300px]">
-              <img className="w-[300px]" src={picc} alt="" />
+            <div className="border flex justify-center items-center h-[200px]">
+              <img
+                className="w-[100%]"
+                src={jordansImages && jordansImages[0]}
+                alt=""
+              />
             </div>
             <div className=" flex justify-center items-center gap-1 p-1 mt-[10px] flex-wrap">
-              <div className="w-[100px] border p-1 rounded shadow">
-                <img src={picc} alt="" />
-              </div>
-              <div className="w-[100px] border p-1 rounded shadow">
-                <img src={picc} alt="" />
-              </div>
-              <div className="w-[100px] border p-1 rounded shadow">
-                <img src={picc} alt="" />
-              </div>
+              {jordansImages?.map((el, index) => (
+                <div
+                  key={index}
+                  className="w-[100px] border p-1 rounded shadow"
+                >
+                  <img src={el} alt="" />
+                </div>
+              ))}
             </div>
           </div>
         </div>
