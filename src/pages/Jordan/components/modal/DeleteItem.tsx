@@ -30,13 +30,14 @@ export default function DeleteItem({ onClose, details }) {
             disabled={isLoading}
             className={`border p-2 mt-[20px] w-[100%] rounded-md text-white  duration-150 text-[18px] ${
               isLoading
-                ? "disabled:bg-gray-500"
+                ? "disabled:bg-gray-400/50"
                 : "spinnerColor spinnerHoverColor"
             }`}
           >
             Delete
           </button>
           <button
+            disabled={isLoading}
             onClick={() => onClose()}
             className="border p-2 my-[10px] w-[100%] rounded-md text-white bg-red-800 hover:bg-red-500 duration-150 text-[18px]"
           >

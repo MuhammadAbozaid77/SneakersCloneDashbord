@@ -1,34 +1,39 @@
 import { useForm } from "react-hook-form";
 import FormInput from "../../../../components/ui/FormInput";
-import useAddNewJordan from "../../../../hooks/jordanHooks/useAddNewJordan";
-
-// type propsType = {
-//   onClose: () => void;
-// };
+import useEditJordanItem from "../../../../hooks/jordanHooks/useEditJordanItem";
 
 type valuesType = {
   productName: string;
   folderName: string;
   productPrice: string;
   productDescripition: string;
-  productImages: FileList;
 };
-export default function AddNewItem({ onClose }) {
-  const { isLoading, mutateAddNewJordan } = useAddNewJordan({ onClose });
+export default function EditItemModal({ onClose, details }) {
+  const { isLoading, mutateEditJordanItem } = useEditJordanItem({ onClose });
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      productName: details?.productName || "",
+      folderName: details?.folderName,
+      productPrice: details?.productPrice || "",
+      productDescripition: details?.productDescripition || "",
+      //   id: details?.id,
+    },
+  });
   const handelSubmitFun = (values: valuesType) => {
-    mutateAddNewJordan(values);
+    console.log(values);
+
+    mutateEditJordanItem({ values, id: details?.id });
   };
 
   return (
     <>
       <div
         onClick={() => onClose()}
-        className="h-[100]vh absolute inset-0 bg-slate-900/70 flex justify-center items-center overflow-y-scroll"
+        className="h-[100]vh fixed inset-0 bg-slate-900/70 flex justify-center items-center overflow-y-scroll"
       >
         <form
           onSubmit={handleSubmit(handelSubmitFun)}
@@ -37,7 +42,7 @@ export default function AddNewItem({ onClose }) {
         >
           <div className="border-b my-5  ">
             <h1 className="titleColor p-1 text-[24px] font-bold">
-              Add New Jordan
+              Edit Jordan Item
             </h1>
           </div>
           <FormInput label={"ProductName"} error={errors?.productName?.message}>
@@ -47,23 +52,6 @@ export default function AddNewItem({ onClose }) {
               id="productName"
               {...register("productName", {
                 required: "This Product Name Is Required",
-              })}
-            />
-          </FormInput>
-          <FormInput
-            label={"ImageFolder Name"}
-            error={errors?.folderName?.message}
-          >
-            <input
-              className="border p-2 w-[100%] rounded-md text-gray-500 text-[18px]"
-              type="text"
-              id="folderName"
-              {...register("folderName", {
-                required: "This Image Folder Name Is Required",
-                pattern: {
-                  value: /^[A-Za-z]+$/,
-                  message: "No Space Among Text",
-                },
               })}
             />
           </FormInput>
@@ -92,20 +80,6 @@ export default function AddNewItem({ onClose }) {
               className="border p-2 w-[100%] rounded-md text-gray-500 text-[18px]"
             ></textarea>
           </FormInput>
-          <FormInput
-            label={"productImages"}
-            error={errors?.productImages?.message}
-          >
-            <input
-              className="border p-2 w-[100%] rounded-md text-gray-500 text-[18px]"
-              type="file"
-              multiple={true}
-              id="productImages"
-              {...register("productImages", {
-                required: "This Product Images Is Required",
-              })}
-            />
-          </FormInput>
 
           <button
             type="submit"
@@ -116,11 +90,11 @@ export default function AddNewItem({ onClose }) {
                 : "spinnerColor spinnerHoverColor"
             }`}
           >
-            Add New Item
+            Edit
           </button>
           <button
-            onClick={() => onClose()}
             disabled={isLoading}
+            onClick={() => onClose()}
             className="border p-2 my-[10px] w-[100%] rounded-md text-white bg-red-800 hover:bg-red-500 duration-150 text-[18px]"
           >
             Close

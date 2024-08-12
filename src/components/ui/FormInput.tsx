@@ -11,9 +11,9 @@ export default function FormInput({ label, error, children }: propsType) {
         <label className="font-semibold text-gray-600" htmlFor={`${label}`}>
           {label}
         </label>
+        {children}
+        {error && <span className="text-red-500">{error}</span>}
       </div>
-      {children}
-      {error && <span className="text-red-500">{error}</span>}
     </>
   );
 }

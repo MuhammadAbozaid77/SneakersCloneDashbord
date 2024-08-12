@@ -125,23 +125,32 @@ export async function deleteFolderImage(folderName) {
       await deleteObject(itemRef);
     }
   } catch (error) {
-    console.error("Error deleting folder:", error);
+    throw new Error("Error deleting folder:");
   }
 }
 /* -------------------------------  Delete Image From Folder  --------------------------- */
 
-export async function deleteImageFromFolder(folderName, imageName) {
+export async function deleteImageFromFolder({ folderName, imageName }) {
+  const url = imageName;
+  const [beforeFolder, rest] = url.split("%2F");
+  const [imageURL] = rest.split("?alt=");
+
   try {
     // Create a reference to the file to delete
-    const fileRef = ref(
-      firebaseStorage,
-      `${"Muhammaded77Picsss"}/${"images.jfif"}`
-    );
+    const fileRef = ref(firebaseStorage, `${folderName}/${imageURL}`);
     // Delete the file
     await deleteObject(fileRef);
-
-    // console.log(`Image '${imageName}' deleted successfully from folder '${folderName}'.`);
   } catch (error) {
-    console.error("Error deleting image:", error);
+    throw new Error(`Error deleting image: ${error.message}`);
+  }
+}
+
+/* ----------------------------------- Edit Jordan Item Object ---------------------------------------- */
+export async function editJordanItem({ values, id }) {
+  const docObject = doc(db, "jordan", id);
+  try {
+    await updateDoc(docObject, values);
+  } catch (error) {
+    throw new Error("Cant Updated This Cabin");
   }
 }
