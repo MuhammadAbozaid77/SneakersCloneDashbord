@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
-import { deleteImageFromFolder } from "../../data/apiJordan";
 import { useMutation, useQueryClient } from "react-query";
+import { deleteImageFromFolder } from "../../data/apiFootballShoes";
 
 export default function useDeleteAnImage() {
   const queryClient = useQueryClient();
@@ -8,16 +8,16 @@ export default function useDeleteAnImage() {
   const {
     error,
     isLoading,
-    mutate: mutateDeleteJordanImage,
+    mutate: mutateDeleteFootballShoesImage,
   } = useMutation({
     mutationFn: deleteImageFromFolder,
     onSuccess: () => {
-      toast.success("Jordan image deleted successfully");
+      toast.success("Football Shoes image deleted successfully");
       queryClient.invalidateQueries({
-        queryKey: ["jordansDetails"],
+        queryKey: ["footballShoesDetails"],
       });
     },
   });
 
-  return { mutateDeleteJordanImage, isLoading, error };
+  return { mutateDeleteFootballShoesImage, isLoading, error };
 }

@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import FormInput from "../../../../components/ui/FormInput";
-import useAddNewJordan from "../../../../hooks/jordanHooks/useAddNewJordan";
+import useAddNewFootballShoes from "../../../../hooks/footballShoesHooks/useAddNewFootballShoes";
 
 interface AddNewItemProps {
   onClose: () => void;
@@ -15,16 +15,16 @@ interface FormValues {
 }
 
 export default function AddNewItem({ onClose }: AddNewItemProps) {
-  const { isLoading, mutateAddNewJordan } = useAddNewJordan({ onClose });
-
+  const { isLoading, mutateAddNewFootballShoes } = useAddNewFootballShoes({
+    onClose,
+  });
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<FormValues>();
-
-  const handelSubmitFun: SubmitHandler<FormValues> = (values) => {
-    mutateAddNewJordan(values);
+  const handelSubmitFun  : SubmitHandler<FormValues>= (values) => {
+    mutateAddNewFootballShoes(values);
   };
 
   return (
@@ -40,7 +40,7 @@ export default function AddNewItem({ onClose }: AddNewItemProps) {
         >
           <div className="border-b my-5  ">
             <h1 className="titleColor p-1 text-[24px] font-bold">
-              Add New Jordan
+              Add New FootballShoes
             </h1>
           </div>
           <FormInput label={"ProductName"} error={errors?.productName?.message}>
