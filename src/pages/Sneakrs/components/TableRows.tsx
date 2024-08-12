@@ -1,16 +1,15 @@
-import useGetJordan from "../../../hooks/jordanHooks/useGetJordan";
 import SpinnerLoading from "../../../components/ui/SpinnerLoading";
 import TableItem from "./TableItem";
-import ErrorFounded from "../../../components/ui/ErrorFounded";
+import useGetSneakers from "../../../hooks/sneakrsHooks/useGetSneakers";
 
 export default function TableRows() {
-  const { isLoading, error, jordansData } = useGetJordan();
+  const { isLoading, error, sneakersData } = useGetSneakers();
 
   if (isLoading) {
     return <SpinnerLoading />;
   }
   if (error) {
-    return <ErrorFounded error={error} />;
+    <> "Error" </>;
   }
 
   return (
@@ -36,7 +35,7 @@ export default function TableRows() {
               </tr>
             </thead>
             <tbody>
-              {jordansData?.map((el, index) => (
+              {sneakersData?.map((el, index) => (
                 <TableItem item={el} key={index} />
               ))}
             </tbody>

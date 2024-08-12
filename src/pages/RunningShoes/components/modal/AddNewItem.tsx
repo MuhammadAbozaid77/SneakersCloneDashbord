@@ -1,27 +1,19 @@
 import { useForm } from "react-hook-form";
 import FormInput from "../../../../components/ui/FormInput";
-import useAddNewJordan from "../../../../hooks/jordanHooks/useAddNewJordan";
+import useAddNewRunningShoes from "../../../../hooks/runningShoesHook/useAddNewRunningShoes";
 
-// type propsType = {
-//   onClose: () => void;
-// };
-
-type valuesType = {
-  productName: string;
-  folderName: string;
-  productPrice: string;
-  productDescripition: string;
-  productImages: FileList;
-};
 export default function AddNewItem({ onClose }) {
-  const { isLoading, mutateAddNewJordan } = useAddNewJordan({ onClose });
+  const { isLoading, mutateAddNewRunningShoes } = useAddNewRunningShoes({
+    onClose,
+  });
+
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
-  const handelSubmitFun = (values: valuesType) => {
-    mutateAddNewJordan(values);
+  const handelSubmitFun = (values) => {
+    mutateAddNewRunningShoes(values);
   };
 
   return (

@@ -4,7 +4,7 @@ import TableRows from "./components/TableRows";
 import AddNewItem from "./components/modal/AddNewItem";
 
 export default function Jordan() {
-  const [showAddNew, setShowAddNew] = useState(false);
+  const [showAddNew, setShowAddNew] = useState<boolean>(false);
   return (
     <>
       <PageContainer>

@@ -1,4 +1,10 @@
-export default function FormInput({ label, error, children }) {
+type propsType = {
+  label: string;
+  error: string;
+  children: React.ReactNode;
+};
+
+export default function FormInput({ label, error, children }: propsType) {
   return (
     <>
       <div className="flex justify-center items-start flex-col mb-3">

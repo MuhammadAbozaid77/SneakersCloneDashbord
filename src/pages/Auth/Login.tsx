@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
 import useLogin from "../../hooks/useLogin";
 import FormSpinner from "../../components/ui/FormSpinner";
-
+type valuesType = {
+  userEmail: string;
+  userPassword: string;
+};
 export default function Login() {
   const {
     handleSubmit,
@@ -9,7 +12,7 @@ export default function Login() {
     formState: { errors },
   } = useForm();
   const { mutateLogin, isLoading, error } = useLogin();
-  const handelSubmitFun = (values) => {
+  const handelSubmitFun = (values: valuesType) => {
     mutateLogin(values);
   };
 
