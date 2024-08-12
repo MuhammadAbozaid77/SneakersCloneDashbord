@@ -1,8 +1,10 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
 import { deleteJordanItem } from "../../data/apiJordan";
 
 export default function useDeleteItem({ onClose }) {
+  const queryClient = useQueryClient();
+
   const {
     error,
     isLoading,
@@ -11,6 +13,9 @@ export default function useDeleteItem({ onClose }) {
     mutationFn: deleteJordanItem,
     onSuccess: () => {
       toast.success("Jordan Deleted Successfuly");
+      queryClient.invalidateQueries({
+        queryKey: ["jordans"],
+      });
       onClose();
     },
   });

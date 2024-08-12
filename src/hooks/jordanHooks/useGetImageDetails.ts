@@ -1,15 +1,18 @@
 import { useQuery } from "react-query";
 import { GetJordanImages } from "../../data/apiJordan";
 
-export default function useGetImageDetails(folderName) {
+type folderNameType = {
+  folderName: string;
+};
+export default function useGetImageDetails(folderName: folderNameType) {
   const {
-    isLoading,
+    isLoading: imagesLoading,
     data: jordansImages,
-    error,
+    error: imagesError,
   } = useQuery({
     queryKey: ["useGetImageDetails", folderName],
     queryFn: () => GetJordanImages({ folderName }),
   });
 
-  return { isLoading, jordansImages, error };
+  return { imagesLoading, jordansImages, imagesError };
 }

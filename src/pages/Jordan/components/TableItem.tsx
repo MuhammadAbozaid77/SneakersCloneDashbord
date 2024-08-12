@@ -22,10 +22,12 @@ export default function TableItem({ item }) {
           {item?.productName}
         </th>
         <td className="px-6 py-4"> {item?.productPrice}</td>
-        <td className="px-6 py-4 ">
-          <button className="border p-2 rounded-md flex justify-center items-center shadow w-[100px]">
-            <FaUserEdit size={18} className="text-blue-500" />
-            <span className="capitalize  font-semibold mx-1">Edit</span>
+        <td className="px-6 py-4">
+          <button className="bg-blue-500 p-2 rounded flex justify-center items-center shadow w-[100px]">
+            <FaUserEdit size={18} className="text-white" />
+            <span className="capitalize  font-semibold mx-1 text-white">
+              Edit
+            </span>
           </button>
         </td>
         <td
@@ -34,9 +36,11 @@ export default function TableItem({ item }) {
             setShowDeleteModal({ id: item?.id, folderName: item?.folderName })
           }
         >
-          <button className="border p-2 rounded-md flex justify-center items-center shadow w-[100px]">
-            <FaTrashAlt size={18} className="text-red-500" />
-            <span className="capitalize  font-semibold mx-1">delete</span>
+          <button className="bg-red-500 p-2 rounded flex justify-center items-center shadow w-[100px]">
+            <FaTrashAlt size={18} className="text-white" />
+            <span className="capitalize text-white font-semibold mx-1">
+              delete
+            </span>
           </button>
         </td>
       </tr>

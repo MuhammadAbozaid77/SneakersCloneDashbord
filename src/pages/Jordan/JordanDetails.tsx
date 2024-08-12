@@ -1,21 +1,63 @@
 import { useParams } from "react-router-dom";
 import PageContainer from "../../components/ui/PageContainer";
-import useGetImageDetails from "../../hooks/jordanHooks/useGetImageDetails";
+import SpinnerLoading from "../../components/ui/SpinnerLoading";
+import ErrorFounded from "../../components/ui/ErrorFounded";
+import useGetJordansDetails from "../../hooks/jordanHooks/useGetJordansDetails";
 
 export default function JordanDetails() {
   const { folderName, id } = useParams();
 
-  const { isLoading, jordansImages, error } = useGetImageDetails(folderName);
+  const { isLoading, error, jordansDetails } = useGetJordansDetails(
+    folderName,
+    id
+  );
 
+  if (isLoading) {
+    return <SpinnerLoading />;
+  }
+  if (error) {
+    return <ErrorFounded error={error} />;
+  }
   return (
     <>
       <PageContainer>
-        <div className="grid md:grid-cols-2 grid-cols-1 px-5 gap-5 h-[calc(100vh-140px)]">
+        <div className="flex flex-col flex-wrap px-5 gap-5">
           <div className="flex flex-col justify-between">
             <div className="flex justify-center items-start flex-col gap-2">
-              <div className="text-[18px]"> Name : OKKKK </div>
-              <div className="text-[18px]"> Price </div>
-              <div className="text-[18px]"> Descripition </div>
+              <div className="text-[18px] flex">
+                <span className="px-1 shadow min-w-[150px] bg-gray-200">
+                  Product ID:
+                </span>
+                <span className="mx-2 font-semibold">
+                  {jordansDetails?.detailsObject[0]?.id}
+                </span>
+              </div>
+              <div className="text-[18px] flex">
+                <span className="px-1 shadow min-w-[150px] bg-gray-200">
+                  Product Name:
+                </span>
+                <span className="mx-2 font-semibold">
+                  {jordansDetails?.detailsObject[0]?.productName}
+                </span>
+              </div>
+              <div className="text-[18px] flex">
+                <span className="px-1 shadow min-w-[150px] bg-gray-200">
+                  Product Price:
+                </span>
+                <span className="mx-2 font-semibold">
+                  {jordansDetails?.detailsObject[0]?.productPrice}
+                </span>
+              </div>
+              <div className="text-[18px] flex">
+                <span className="px-1 shadow min-w-[150px] bg-gray-200">
+                  {" "}
+                  Descripition:
+                </span>
+                <span className="mx-2 font-semibold">
+                  {jordansDetails?.detailsObject[0]?.productDescripition}
+                </span>
+              </div>
+
               <div className="flex w-[100%]">
                 <button className="w-[100%] mt-[20px] rounded shadow py-2 px-4 text-white spinnerColor spinnerHoverColor duration-100 ">
                   Edit Details
@@ -24,20 +66,10 @@ export default function JordanDetails() {
             </div>
           </div>
           <div className="">
-            <div className="border flex justify-center items-center h-[200px]">
-              <img
-                className="w-[100%]"
-                src={jordansImages && jordansImages[0]}
-                alt=""
-              />
-            </div>
-            <div className=" flex justify-center items-center gap-1 p-1 mt-[10px] flex-wrap">
-              {jordansImages?.map((el, index) => (
-                <div
-                  key={index}
-                  className="w-[100px] border p-1 rounded shadow"
-                >
-                  <img src={el} alt="" />
+            <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1   gap-1 p-1 mt-[10px] flex-wrap">
+              {jordansDetails?.imageDetails?.map((el, index) => (
+                <div key={index} className=" border rounded shadow">
+                  <img src={el} alt="" className="" />
                 </div>
               ))}
             </div>

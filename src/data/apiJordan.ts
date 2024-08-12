@@ -54,6 +54,15 @@ export async function GetJordanImages({ folderName }) {
     }
   }
 }
+/* -------------------------  Create Jordan Only Image and Details  -------------------- */
+export async function getJordanDetails(folderName, id) {
+  const imageDetails = await GetJordanImages({ folderName });
+  const jordanDetails = await getJordanData();
+  const detailsObject = jordanDetails?.filter((el) => {
+    return el.id === id;
+  });
+  return { imageDetails, detailsObject };
+}
 
 /* -------------------------------  Create Jordan  --------------------------- */
 export async function addNewJordanItem({
