@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { getJordanDetails } from "../../data/apiJordan";
 
-export default function useGetJordansDetails(folderName, id) {
+export default function useGetJordansDetails(folderName: string, id: string) {
   const {
     isLoading,
     data: jordansDetails,

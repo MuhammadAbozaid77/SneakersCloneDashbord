@@ -10,7 +10,9 @@ export default function TableItem({ item }) {
   const [showEditModal, setShowEditModal] = useState(null);
   const navigate = useNavigate();
   const handelNavigate = () => {
-    navigate(`/jordan/jordandetails/${item?.id}/${item?.folderName}`);
+    navigate(
+      `/footballShoes/footballShoesdetails/${item?.id}/${item?.folderName}`
+    );
   };
 
   return (

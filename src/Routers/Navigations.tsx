@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import AppLayout from "./AppLayout";
-import Home from "../pages/Home";
+import Home from "../pages/Dashbord/Home";
 import Jordan from "../pages/Jordan/Jordan";
 import Sneakrs from "../pages/Sneakrs/Sneakrs";
 import RunningShoes from "../pages/RunningShoes/RunningShoes";
@@ -10,6 +10,7 @@ import Login from "../pages/Auth/Login";
 import PageNotFound from "../components/ui/PageNotFound";
 import ProtectedRouting from "./ProtectedRouting";
 import JordanDetails from "../pages/Jordan/JordanDetails";
+import FootballShoesDetails from "../pages/FootballShoes/FootballShoesDetails";
 // import PageNotFound from "../components/ui/PageNotFound";
 
 export default function Navigations() {
@@ -34,6 +35,10 @@ export default function Navigations() {
           <Route path="sneakrs" element={<Sneakrs />} />
           <Route path="runningShoes" element={<RunningShoes />} />
           <Route path="footballShoes" element={<FootballShoes />} />
+          <Route
+            path="footballShoes/footballShoesdetails/:id/:folderName"
+            element={<FootballShoesDetails />}
+          />
           <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="login" element={<Login />} />

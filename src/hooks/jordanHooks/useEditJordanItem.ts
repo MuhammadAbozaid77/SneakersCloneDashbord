@@ -2,7 +2,11 @@ import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
 import { editJordanItem } from "../../data/apiJordan";
 
-export default function useEditJordanItem({ onClose }) {
+interface UseEditJordanItemProps {
+  onClose: () => void;
+}
+
+export default function useEditJordanItem({ onClose }: UseEditJordanItemProps) {
   const queryClient = useQueryClient();
 
   const {
@@ -12,11 +16,11 @@ export default function useEditJordanItem({ onClose }) {
   } = useMutation({
     mutationFn: editJordanItem,
     onSuccess: () => {
-      toast.success("Jordan Updated Successfuly");
       queryClient.invalidateQueries({
         queryKey: ["jordansDetails"],
       });
       onClose();
+      toast.success("Jordan Updated Successfully");
     },
   });
 

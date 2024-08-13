@@ -105,7 +105,7 @@ export async function createFootballShoesFolderImage(
 export async function deleteFootballShoesItem({ folderName, id }) {
   try {
     await deleteFolderImage(folderName);
-    const docObject = doc(db, "FootballShoes", id);
+    const docObject = doc(db, "footballshoes", id);
     try {
       await deleteDoc(docObject);
     } catch (error) {
@@ -150,7 +150,7 @@ export async function deleteImageFromFolder({ folderName, imageName }) {
 
 /* ----------------------------------- Edit FootballShoes Item Object ---------------------------------------- */
 export async function editFootballShoesItem({ values, id }) {
-  const docObject = doc(db, "FootballShoes", id);
+  const docObject = doc(db, "footballshoes", id);
   try {
     await updateDoc(docObject, values);
   } catch (error) {
