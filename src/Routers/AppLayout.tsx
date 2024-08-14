@@ -12,7 +12,7 @@ export default function AppLayout() {
     <>
       <div className="h-[100vh] flex justify-between items-center relative">
         <Sidebar />
-        {showSidebar && <ResponsiveSidebar />}
+        {showSidebar && <ResponsiveSidebar setShowSidebar={setShowSidebar} />}
         <div className="w-[100%] bg-gray-100 h-[100%] overflow-y-auto ">
           <Header setShowSidebar={setShowSidebar} />
           <AppContainer>

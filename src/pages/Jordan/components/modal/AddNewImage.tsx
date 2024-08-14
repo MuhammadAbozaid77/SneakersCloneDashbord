@@ -4,6 +4,7 @@ import useAddNewImage from "../../../../hooks/jordanHooks/useAddNewImage";
 
 interface AddNewItemProps {
   onClose: () => void;
+  folderName: string;
 }
 
 interface FormValues {

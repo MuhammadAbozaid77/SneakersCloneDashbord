@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import PageContainer from "./PageContainer";
 
 export default function PageNotFound() {
   return (
-    <>
+    <PageContainer>
       <section className="bg-white dark:bg-gray-900 flex justify-center items-center h-[100vh]">
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center">
@@ -25,6 +26,6 @@ export default function PageNotFound() {
           </div>
         </div>
       </section>
-    </>
+    </PageContainer>
   );
 }

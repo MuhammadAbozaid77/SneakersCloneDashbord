@@ -7,6 +7,10 @@
 .navLinkes .active {
   background-color: #e0e0e0;
 }
+.navLinkesResponsive .active {
+  background-color: #e0e0e0;
+  color: black;
+}
 
 body {
   font-family: "Cairo", sans-serif;

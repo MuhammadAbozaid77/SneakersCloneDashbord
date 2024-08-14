@@ -3,15 +3,24 @@ import SpinnerLoading from "../../../components/ui/SpinnerLoading";
 import TableItem from "./TableItem";
 import ErrorFounded from "../../../components/ui/ErrorFounded";
 import NoDataToDisplay from "../../../components/ui/NoDataToDisplay";
+import PageContainer from "../../../components/ui/PageContainer";
 
 export default function TableRows() {
   const { isLoading, error, jordansData } = useGetJordan();
 
   if (isLoading) {
-    return <SpinnerLoading />;
+    return (
+      <>
+        <SpinnerLoading />;
+      </>
+    );
   }
   if (error) {
-    return <ErrorFounded error={error} />;
+    return (
+      <>
+        <ErrorFounded error={error} />
+      </>
+    );
   }
 
   if (jordansData?.length === 0 || null) {
@@ -19,7 +28,7 @@ export default function TableRows() {
   }
 
   return (
-    <>
+    <PageContainer>
       <div className="p-5">
         <div className="relative overflow-x-auto">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -48,6 +57,6 @@ export default function TableRows() {
           </table>
         </div>
       </div>
-    </>
+    </PageContainer>
   );
 }

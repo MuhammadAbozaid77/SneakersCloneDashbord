@@ -20,12 +20,9 @@ export default function Jordan() {
           </div>
         </div>
       </PageContainer>
-      <PageContainer>
-        <TableRows />
-      </PageContainer>
+      <TableRows />
 
       {showAddNew && <AddNewItem onClose={() => setShowAddNew(false)} />}
     </>
   );
 }
-// deleteImageFromFolder
