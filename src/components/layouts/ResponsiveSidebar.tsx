@@ -5,9 +5,12 @@ import LogoCompo from "./LogoCompo";
 import { LuLogOut } from "react-icons/lu";
 import { FaCircleUser } from "react-icons/fa6";
 import { BsChevronDoubleLeft } from "react-icons/bs";
+// Define the type for the props
+interface HeaderProps {
+  setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-
-export default function ResponsiveSidebar({ setShowSidebar }) {
+export default function ResponsiveSidebar({ setShowSidebar }: HeaderProps) {
   const { mutateLogout } = useLogout();
   const handelLogout = () => {
     mutateLogout();
@@ -53,10 +56,7 @@ export default function ResponsiveSidebar({ setShowSidebar }) {
                   to={"profile"}
                   className="flex justify-start items-center p-3 text-slate-600 hover:text-black"
                 >
-                  <FaCircleUser
-                    size={30}
-                    className="text-white "
-                  />
+                  <FaCircleUser size={30} className="text-white " />
                   <span className="mx-2 font-semibold  text-[18px]">
                     Profile
                   </span>
