@@ -1,30 +1,41 @@
 import { useForm } from "react-hook-form";
 import FormInput from "../../../../components/ui/FormInput";
-import useAddNewSneakrs from "../../../../hooks/sneakrsHooks/useAddNewSneakrs";
-import { v4 as uuidv4 } from "uuid";
+import useEditSneakersItem from "../../../../hooks/sneakrsHooks/useEditSneakersItem";
 
-export default function AddNewItem({ onClose }) {
-  const uniqueId = uuidv4();
-
-  const { isLoading, mutateAddNewSneakers } = useAddNewSneakrs({ onClose });
-
+type valuesType = {
+  productName: string;
+  folderName: string;
+  productPrice: string;
+  productDescripition: string;
+};
+export default function EditItemModal({ onClose, details }) {
+  const { isLoading, mutateEditSneakersItem } = useEditSneakersItem({
+    onClose,
+  });
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm();
-  const handelSubmitFun = (values) => {
-    mutateAddNewSneakers({
-      ...values,
-      folderName: values.folderName + uniqueId,
-    });
+  } = useForm({
+    defaultValues: {
+      productName: details?.productName || "",
+      folderName: details?.folderName,
+      productPrice: details?.productPrice || "",
+      productDescripition: details?.productDescripition || "",
+      //   id: details?.id,
+    },
+  });
+  const handelSubmitFun = (values: valuesType) => {
+    console.log(values);
+
+    mutateEditSneakersItem({ values, id: details?.id });
   };
 
   return (
     <>
       <div
         onClick={() => onClose()}
-        className="h-[100]vh absolute inset-0 bg-slate-900/70 flex justify-center items-center overflow-y-scroll"
+        className="h-[100]vh fixed inset-0 bg-slate-900/70 flex justify-center items-center overflow-y-scroll"
       >
         <form
           onSubmit={handleSubmit(handelSubmitFun)}
@@ -33,7 +44,7 @@ export default function AddNewItem({ onClose }) {
         >
           <div className="border-b my-5  ">
             <h1 className="titleColor p-1 text-[24px] font-bold">
-              Add New Sneakers
+              Edit Sneakers Item
             </h1>
           </div>
           <FormInput label={"ProductName"} error={errors?.productName?.message}>
@@ -43,23 +54,6 @@ export default function AddNewItem({ onClose }) {
               id="productName"
               {...register("productName", {
                 required: "This Product Name Is Required",
-              })}
-            />
-          </FormInput>
-          <FormInput
-            label={"ImageFolder Name"}
-            error={errors?.folderName?.message}
-          >
-            <input
-              className="border p-2 w-[100%] rounded-md text-gray-500 text-[18px]"
-              type="text"
-              id="folderName"
-              {...register("folderName", {
-                required: "This Image Folder Name Is Required",
-                pattern: {
-                  value: /^[A-Za-z]+$/,
-                  message: "No Space Among Text",
-                },
               })}
             />
           </FormInput>
@@ -88,33 +82,20 @@ export default function AddNewItem({ onClose }) {
               className="border p-2 w-[100%] rounded-md text-gray-500 text-[18px]"
             ></textarea>
           </FormInput>
-          <FormInput
-            label={"productImages"}
-            error={errors?.productImages?.message}
-          >
-            <input
-              className="border p-2 w-[100%] rounded-md text-gray-500 text-[18px]"
-              type="file"
-              multiple={true}
-              id="productImages"
-              {...register("productImages", {
-                required: "This Product Images Is Required",
-              })}
-            />
-          </FormInput>
 
           <button
             type="submit"
             disabled={isLoading}
             className={`border p-2 mt-[20px] w-[100%] rounded-md text-white  duration-150 text-[18px] ${
               isLoading
-                ? "disabled:bg-gray-500"
+                ? "disabled:bg-gray-400/50"
                 : "spinnerColor spinnerHoverColor"
             }`}
           >
-            Add New Item
+            Edit
           </button>
           <button
+            disabled={isLoading}
             onClick={() => onClose()}
             className="border p-2 my-[10px] w-[100%] rounded-md text-white bg-red-800 hover:bg-red-500 duration-150 text-[18px]"
           >

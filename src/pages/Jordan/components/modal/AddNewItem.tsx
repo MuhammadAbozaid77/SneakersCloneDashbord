@@ -1,6 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import FormInput from "../../../../components/ui/FormInput";
 import useAddNewJordan from "../../../../hooks/jordanHooks/useAddNewJordan";
+import { v4 as uuidv4 } from "uuid";
 
 interface AddNewItemProps {
   onClose: () => void;
@@ -15,6 +16,7 @@ interface FormValues {
 }
 
 export default function AddNewItem({ onClose }: AddNewItemProps) {
+  const uniqueId = uuidv4();
   const { isLoading, mutateAddNewJordan } = useAddNewJordan({ onClose });
 
   const {
@@ -24,7 +26,10 @@ export default function AddNewItem({ onClose }: AddNewItemProps) {
   } = useForm<FormValues>();
 
   const handelSubmitFun: SubmitHandler<FormValues> = (values) => {
-    mutateAddNewJordan(values);
+    mutateAddNewJordan({
+      ...values,
+      folderName: values.folderName + uniqueId,
+    });
   };
 
   return (

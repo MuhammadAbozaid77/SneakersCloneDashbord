@@ -1,17 +1,26 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
-import { deleteSneakrsItem } from "../../data/apiSneakrs";
+import { deleteSneakersItem } from "../../data/apiSneakrs";
 
-export default function useDeleteItem({ onClose }) {
+interface UseDeleteItemProps {
+  onClose: () => void;
+}
+
+export default function useDeleteItem({ onClose }: UseDeleteItemProps) {
+  const queryClient = useQueryClient();
+
   const {
     error,
     isLoading,
     mutate: mutateDeleteSneakers,
   } = useMutation({
-    mutationFn: deleteSneakrsItem,
+    mutationFn: deleteSneakersItem,
     onSuccess: () => {
-      toast.success("Jordan Deleted Successfuly");
+      queryClient.invalidateQueries({
+        queryKey: ["sneakersData"],
+      });
       onClose();
+      toast.success("Sneakers Deleted Successfully");
     },
   });
 

@@ -1,19 +1,28 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
-import { addNewSneakrsItem } from "../../data/apiSneakrs";
+import { addNewSneakersItem } from "../../data/apiSneakrs";
 
-export default function useAddNewSneakrs({ onClose }) {
+interface UseAddNewSneakersProps {
+  onClose: () => void;
+}
+
+export default function useAddNewSneakrs({ onClose }: UseAddNewSneakersProps) {
+  const queryClient = useQueryClient();
+
   const {
     error,
     isLoading,
-    mutate: mutateAddNewSneakrs,
+    mutate: mutateAddNewSneakers,
   } = useMutation({
-    mutationFn: addNewSneakrsItem,
+    mutationFn: addNewSneakersItem,
     onSuccess: () => {
-      toast.success("New Jordan Added Successfuly");
+      queryClient.invalidateQueries({
+        queryKey: ["sneakersData"],
+      });
       onClose();
+      toast.success("New Sneakers Added Successfully");
     },
   });
 
-  return { mutateAddNewSneakrs, isLoading, error };
+  return { mutateAddNewSneakers, isLoading, error };
 }

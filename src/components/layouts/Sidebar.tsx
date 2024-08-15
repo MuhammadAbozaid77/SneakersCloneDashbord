@@ -12,7 +12,7 @@ export default function Sidebar() {
   };
   return (
     <>
-      <div className="w-[350px] lg:flex justify-between flex-col hidden bg-white h-[100%] overflow-y-auto border-r ">
+      <div className="w-[350px] lg:flex justify-between flex-col hidden bg-white h-[100%] overflow-y-auto border-r">
         <div>
           <LogoCompo />
           <ul className="">

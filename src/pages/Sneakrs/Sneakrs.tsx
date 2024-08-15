@@ -2,13 +2,14 @@ import { useState } from "react";
 import PageContainer from "../../components/ui/PageContainer";
 import TableRows from "./components/TableRows";
 import AddNewItem from "./components/modal/AddNewItem";
-export default function Sneakrs() {
+
+export default function Jordan() {
   const [showAddNew, setShowAddNew] = useState<boolean>(false);
   return (
     <>
       <PageContainer>
         <div className="flex justify-between items-center px-5">
-          <div className="font-bold text-[20px] text-[#062965]"> Sneakrs </div>
+          <div className="font-bold text-[20px] text-[#062965]"> Sneakers </div>
           <div>
             <button
               onClick={() => setShowAddNew(true)}
@@ -19,9 +20,7 @@ export default function Sneakrs() {
           </div>
         </div>
       </PageContainer>
-      <PageContainer>
-        <TableRows />
-      </PageContainer>
+      <TableRows />
 
       {showAddNew && <AddNewItem onClose={() => setShowAddNew(false)} />}
     </>

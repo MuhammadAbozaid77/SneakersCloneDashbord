@@ -1,49 +1,110 @@
 import { useParams } from "react-router-dom";
 import PageContainer from "../../components/ui/PageContainer";
-import useGetImageDetails from "../../hooks/sneakrsHooks/useGetImageDetails";
+import SpinnerLoading from "../../components/ui/SpinnerLoading";
+import ErrorFounded from "../../components/ui/ErrorFounded";
+import { FaTrashAlt } from "react-icons/fa";
+import { useState } from "react";
+import { MdAddBox } from "react-icons/md";
+import DetailsData from "./components/DetailsData";
+import useGetSneakersDetails from "../../hooks/sneakrsHooks/useGetSneakersDetails";
+import EditItemModal from "./components/modal/EditItemModal";
+import AddNewImage from "./components/modal/AddNewImage";
+import DeleteOnlyImage from "./components/modal/DeleteOnlyImage";
 
+type useParamsType = {
+  folderName: string;
+  id: string;
+};
 export default function SneakersDetails() {
-  const { folderName, id } = useParams();
+  const { folderName, id } = useParams<useParamsType>();
+  const [showEditModal, setShowEditModal] = useState<boolean | null>(null);
+  const [showAddNewImage, setShowAddNewImage] = useState<boolean | null>(null);
+  const [showDeleteOnlyImage, setShowDeleteOnlyImage] = useState<
+    boolean | null
+  >(null);
 
-  const { isLoading, SneakersImages, error } = useGetImageDetails(folderName);
+  const { isLoading, error, sneakersDetails } = useGetSneakersDetails(
+    folderName,
+    id
+  );
 
+  if (isLoading) {
+    return <SpinnerLoading />;
+  }
+  if (error) {
+    return <ErrorFounded error={error} />;
+  }
   return (
     <>
       <PageContainer>
-        <div className="grid md:grid-cols-2 grid-cols-1 px-5 gap-5 h-[calc(100vh-140px)]">
+        <div className="flex flex-col flex-wrap px-5 gap-5">
           <div className="flex flex-col justify-between">
             <div className="flex justify-center items-start flex-col gap-2">
-              <div className="text-[18px]"> Name : OKKKK </div>
-              <div className="text-[18px]"> Price </div>
-              <div className="text-[18px]"> Descripition </div>
+              <DetailsData sneakersDetails={sneakersDetails} />
               <div className="flex w-[100%]">
-                <button className="w-[100%] mt-[20px] rounded shadow py-2 px-4 text-white spinnerColor spinnerHoverColor duration-100 ">
+                <button
+                  onClick={() => setShowEditModal(true)}
+                  className="w-[100%] mt-[20px] rounded shadow py-2 px-4 text-white spinnerColor spinnerHoverColor duration-100 "
+                >
                   Edit Details
                 </button>
               </div>
             </div>
           </div>
           <div className="">
-            <div className="border flex justify-center items-center h-[200px]">
-              <img
-                className="w-[100%]"
-                src={SneakersImages && SneakersImages[0]}
-                alt=""
-              />
-            </div>
-            <div className=" flex justify-center items-center gap-1 p-1 mt-[10px] flex-wrap">
-              {SneakersImages?.map((el, index) => (
+            <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1   gap-1 p-1 mt-[10px] flex-wrap">
+              {sneakersDetails?.imageDetails?.map((el, index) => (
                 <div
                   key={index}
-                  className="w-[100px] border p-1 rounded shadow"
+                  className=" border rounded shadow  flex justify-between flex-col"
                 >
-                  <img src={el} alt="" />
+                  <img
+                    src={el}
+                    alt=""
+                    className="max-h-[260px] min-h-[250px] rounded"
+                  />
+                  <button
+                    onClick={() => setShowDeleteOnlyImage(el)}
+                    className="m-2 flex justify-center items-center bg-red-700 font-semibold hover:bg-red-500 duration-150 text-white p-3 my-1 rounded "
+                  >
+                    <FaTrashAlt size={20} />
+                    <span className="mx-2 text-[18px]"> Delete</span>
+                  </button>
                 </div>
               ))}
+            </div>
+            <div>
+              <button
+                onClick={() => setShowAddNewImage(true)}
+                className="w-[100%] mt-5 flex justify-center items-center bg-gray-500 font-semibold hover:bg-gray-300 duration-150 text-white p-3 my-1 rounded "
+              >
+                <MdAddBox size={30} />
+                <span className="mx-2 text-[18px]"> Add New Image</span>
+              </button>
             </div>
           </div>
         </div>
       </PageContainer>
+
+      {showEditModal && (
+        <EditItemModal
+          onClose={() => setShowEditModal(false)}
+          details={sneakersDetails?.detailsObject[0]}
+        />
+      )}
+      {showAddNewImage && (
+        <AddNewImage
+          onClose={() => setShowAddNewImage(false)}
+          folderName={sneakersDetails?.detailsObject[0]?.folderName}
+        />
+      )}
+      {showDeleteOnlyImage && (
+        <DeleteOnlyImage
+          onClose={() => setShowDeleteOnlyImage(false)}
+          folderName={sneakersDetails?.detailsObject[0]?.folderName}
+          imageName={showDeleteOnlyImage}
+        />
+      )}
     </>
   );
 }

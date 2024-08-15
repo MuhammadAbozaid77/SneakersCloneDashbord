@@ -11,6 +11,7 @@ import PageNotFound from "../components/ui/PageNotFound";
 import ProtectedRouting from "./ProtectedRouting";
 import JordanDetails from "../pages/Jordan/JordanDetails";
 import FootballShoesDetails from "../pages/FootballShoes/FootballShoesDetails";
+import SneakersDetails from "../pages/Sneakrs/SneakersDetails";
 // import PageNotFound from "../components/ui/PageNotFound";
 
 export default function Navigations() {
@@ -33,6 +34,10 @@ export default function Navigations() {
             element={<JordanDetails />}
           />
           <Route path="sneakrs" element={<Sneakrs />} />
+          <Route
+            path="sneakers/sneakersdetails/:id/:folderName"
+            element={<SneakersDetails />}
+          />
           <Route path="runningShoes" element={<RunningShoes />} />
           <Route path="footballShoes" element={<FootballShoes />} />
           <Route

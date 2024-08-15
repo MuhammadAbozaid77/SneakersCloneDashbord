@@ -22,6 +22,11 @@ export default function useEditJordanItem({ onClose }: UseEditJordanItemProps) {
       onClose();
       toast.success("Jordan Updated Successfully");
     },
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["jordans"],
+      });
+    },
   });
 
   return { mutateEditJordanItem, isLoading, error };

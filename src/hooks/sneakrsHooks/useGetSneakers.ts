@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { getSneakrsData } from "../../data/apiSneakrs";
+import { getSneakersData } from "../../data/apiSneakrs";
 
 export default function useGetSneakers() {
   const {
@@ -7,8 +7,8 @@ export default function useGetSneakers() {
     data: sneakersData,
     error,
   } = useQuery({
-    queryKey: ["sneakers"],
-    queryFn: getSneakrsData,
+    queryKey: ["sneakersData"],
+    queryFn: getSneakersData,
   });
   return { isLoading, sneakersData, error };
 }

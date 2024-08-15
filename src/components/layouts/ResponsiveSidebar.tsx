@@ -6,6 +6,7 @@ import { LuLogOut } from "react-icons/lu";
 import { FaCircleUser } from "react-icons/fa6";
 import { BsChevronDoubleLeft } from "react-icons/bs";
 
+
 export default function ResponsiveSidebar({ setShowSidebar }) {
   const { mutateLogout } = useLogout();
   const handelLogout = () => {
@@ -19,11 +20,11 @@ export default function ResponsiveSidebar({ setShowSidebar }) {
   return (
     <>
       <div
-        className="absolute inset-0 lg:hidden block bg-black/70 h-[100%] z-[100]"
+        className="absolute inset-0 lg:hidden block bg-black/80 h-[100%] z-[100]"
         onClick={handelShowSidebar}
       >
         <div
-          className="w-[250px] bg-slate-900 h-[100%] flex flex-col justify-between"
+          className="w-[300px] bg-gray-900 h-[100%] flex flex-col justify-between"
           onClick={(e) => e.stopPropagation()}
         >
           <div>
@@ -47,13 +48,18 @@ export default function ResponsiveSidebar({ setShowSidebar }) {
 
           <div>
             <ul className="">
-              <li className=" bg-white navLinkes duration-150 hover:bg-slate-200 border-t">
+              <li className=" darkBlue   duration-150 hover:bg-[#9c9c9c] border-y">
                 <NavLink
                   to={"profile"}
-                  className="font-semibold flex justify-start items-center p-3 "
+                  className="flex justify-start items-center p-3 text-slate-600 hover:text-black"
                 >
-                  <FaCircleUser size={30} color="#003a91" />
-                  <span className="mx-2 text-slate-600"> Profile </span>
+                  <FaCircleUser
+                    size={30}
+                    className="text-white "
+                  />
+                  <span className="mx-2 font-semibold  text-[18px]">
+                    Profile
+                  </span>
                 </NavLink>
               </li>
 
