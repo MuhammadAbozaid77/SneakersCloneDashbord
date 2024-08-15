@@ -158,12 +158,13 @@ export async function deleteImageFromFolder({
   const url = imageName;
   const [beforeFolder, rest] = url.split("%2F");
   const [imageURL] = rest.split("?alt=");
+  console.log(beforeFolder);
 
   try {
     const fileRef = ref(firebaseStorage, `${folderName}/${imageURL}`);
     await deleteObject(fileRef);
   } catch (error) {
-    throw new Error(`Error Deleting Image: ${error.message}`);
+    throw new Error(`Error Deleting Image: ${error}`);
   }
 }
 

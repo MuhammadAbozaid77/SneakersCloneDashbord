@@ -1,17 +1,19 @@
-//
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
+import { signInWithEmailAndPassword, User } from "firebase/auth";
 import { appAuth } from "./firebaseConfig";
 
+// Define the type for the login function arguments
+interface LoginArgs {
+  userEmail: string;
+  userPassword: string;
+}
+
 //----------------------------------------------------
-export async function registirationFun() {
+export async function registirationFun(): Promise<void> {
   console.log("registirationFun");
 }
+
 //----------------------------------------------------
-export async function loginFunction(args) {
+export async function loginFunction(args: LoginArgs): Promise<User | null> {
   try {
     const { user } = await signInWithEmailAndPassword(
       appAuth,
@@ -21,17 +23,20 @@ export async function loginFunction(args) {
     if (user) {
       return user;
     }
+    return null;
   } catch (error) {
     throw new Error("You Have An Error");
   }
 }
+
 //----------------------------------------------------
-export async function logoutFunction() {
+export async function logoutFunction(): Promise<void> {
   // await signOut(appAuth);
   localStorage.removeItem("userToken");
 }
 
+// Example usage of onAuthStateChanged in a React component
 // const { setuserData } = useContext(AppContextSlice);
-//   onAuthStateChanged(appAuth, async (currentuser) => {
-//     setuserData(currentuser?.email);
-//   });
+// onAuthStateChanged(appAuth, async (currentuser) => {
+//   setuserData(currentuser?.email || null);
+// });

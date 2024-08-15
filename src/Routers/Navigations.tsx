@@ -13,7 +13,6 @@ import JordanDetails from "../pages/Jordan/JordanDetails";
 import FootballShoesDetails from "../pages/FootballShoes/FootballShoesDetails";
 import SneakersDetails from "../pages/Sneakrs/SneakersDetails";
 import RunningShoesDetails from "../pages/RunningShoes/RunningShoesDetails";
-// import PageNotFound from "../components/ui/PageNotFound";
 
 export default function Navigations() {
   return (

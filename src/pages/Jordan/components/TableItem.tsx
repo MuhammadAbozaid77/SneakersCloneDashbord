@@ -5,9 +5,23 @@ import { useState } from "react";
 import DeleteItem from "./modal/DeleteItem";
 import EditItemModal from "./modal/EditItemModal";
 
-export default function TableItem({ item }) {
-  const [showDeleteModal, setShowDeleteModal] = useState(null);
-  const [showEditModal, setShowEditModal] = useState(null);
+type itemType = {
+  item: {
+    id: string;
+    productPrice: number;
+    productName: string;
+    folderName: string;
+  };
+};
+type itemDeleteModal = {
+  id: string;
+  folderName: string;
+};
+export default function TableItem({ item }: itemType) {
+  const [showDeleteModal, setShowDeleteModal] = useState<
+    itemDeleteModal | null | boolean
+  >(null);
+  const [showEditModal, setShowEditModal] = useState<boolean | null>(null);
   const navigate = useNavigate();
   const handelNavigate = () => {
     navigate(`/jordan/jordandetails/${item?.id}/${item?.folderName}`);

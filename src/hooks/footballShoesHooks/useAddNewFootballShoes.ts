@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
 import { addNewFootballShoesItem } from "../../data/apiFootballShoes";
 
+// Define the props type for the hook
 interface UseAddNewFootballShoesProps {
   onClose: () => void;
 }
@@ -22,7 +23,7 @@ export default function useAddNewFootballShoes({
         queryKey: ["footballshoesData"],
       });
       onClose();
-      toast.success("New FootBall Shoes Added Successfully");
+      toast.success("New Football Shoes Added Successfully");
     },
   });
 

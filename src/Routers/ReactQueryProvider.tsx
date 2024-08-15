@@ -1,6 +1,9 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 
-export default function ReactQueryProvider({ children }) {
+type propsType = {
+  children: React.ReactNode;
+};
+export default function ReactQueryProvider({ children }: propsType) {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
