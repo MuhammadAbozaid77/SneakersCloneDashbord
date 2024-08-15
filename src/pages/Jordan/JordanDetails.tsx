@@ -11,17 +11,19 @@ import AddNewImage from "./components/modal/AddNewImage";
 import DeleteOnlyImage from "./components/modal/DeleteOnlyImage";
 import DetailsData from "./components/DetailsData";
 
-type useParamsType = {
+// Define the type for useParams
+type ParamsType = {
   folderName: string;
   id: string;
 };
+
 export default function JordanDetails() {
-  const { folderName, id } = useParams<useParamsType>();
+  const { folderName, id } = useParams<ParamsType>();
   const [showEditModal, setShowEditModal] = useState<boolean | null>(null);
   const [showAddNewImage, setShowAddNewImage] = useState<boolean | null>(null);
-  const [showDeleteOnlyImage, setShowDeleteOnlyImage] = useState<
-    boolean | null
-  >(null);
+  const [showDeleteOnlyImage, setShowDeleteOnlyImage] = useState<string | null>(
+    null
+  );
 
   const { isLoading, error, jordansDetails } = useGetJordansDetails(
     folderName,
@@ -31,9 +33,11 @@ export default function JordanDetails() {
   if (isLoading) {
     return <SpinnerLoading />;
   }
+
   if (error) {
     return <ErrorFounded error={error} />;
   }
+
   return (
     <>
       <PageContainer>
@@ -52,11 +56,11 @@ export default function JordanDetails() {
             </div>
           </div>
           <div className="">
-            <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1   gap-1 p-1 mt-[10px] flex-wrap">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-1 p-1 mt-[10px] flex-wrap">
               {jordansDetails?.imageDetails?.map((el, index) => (
                 <div
                   key={index}
-                  className=" border rounded shadow  flex justify-between flex-col"
+                  className="border rounded shadow flex justify-between flex-col"
                 >
                   <img
                     src={el}
@@ -65,10 +69,10 @@ export default function JordanDetails() {
                   />
                   <button
                     onClick={() => setShowDeleteOnlyImage(el)}
-                    className="m-2 flex justify-center items-center bg-red-700 font-semibold hover:bg-red-500 duration-150 text-white p-3 my-1 rounded "
+                    className="m-2 flex justify-center items-center bg-red-700 font-semibold hover:bg-red-500 duration-150 text-white p-3 my-1 rounded"
                   >
                     <FaTrashAlt size={20} />
-                    <span className="mx-2 text-[18px]"> Delete</span>
+                    <span className="mx-2 text-[18px]">Delete</span>
                   </button>
                 </div>
               ))}
@@ -76,10 +80,10 @@ export default function JordanDetails() {
             <div>
               <button
                 onClick={() => setShowAddNewImage(true)}
-                className="w-[100%] mt-5 flex justify-center items-center bg-gray-500 font-semibold hover:bg-gray-300 duration-150 text-white p-3 my-1 rounded "
+                className="w-[100%] mt-5 flex justify-center items-center bg-gray-500 font-semibold hover:bg-gray-300 duration-150 text-white p-3 my-1 rounded"
               >
                 <MdAddBox size={30} />
-                <span className="mx-2 text-[18px]"> Add New Image</span>
+                <span className="mx-2 text-[18px]">Add New Image</span>
               </button>
             </div>
           </div>

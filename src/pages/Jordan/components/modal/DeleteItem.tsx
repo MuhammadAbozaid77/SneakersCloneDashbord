@@ -1,9 +1,12 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import useDeleteItem from "../../../../hooks/jordanHooks/useDeleteItem";
 
 interface DeleteItemProps {
   onClose: () => void;
-  details: any; // You should replace `any` with the actual type of `details` if known.
+  details: {
+    folderName: string;
+    id: string;
+  }; // You should replace `any` with the actual type of `details` if known.
 }
 
 export default function DeleteItem({ onClose, details }: DeleteItemProps) {
@@ -11,7 +14,7 @@ export default function DeleteItem({ onClose, details }: DeleteItemProps) {
 
   const { handleSubmit } = useForm();
 
-  const handelSubmitFun: SubmitHandler<Record<string, never>> = () => {
+  const handelSubmitFun = () => {
     mutateDeleteJordan(details);
   };
 
