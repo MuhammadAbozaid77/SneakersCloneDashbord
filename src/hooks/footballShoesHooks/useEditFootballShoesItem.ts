@@ -2,7 +2,13 @@ import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
 import { editFootballShoesItem } from "../../data/apiFootballShoes";
 
-export default function useEditFootballShoesItem({ onClose }) {
+interface UseEditFootballShoesItemProps {
+  onClose: () => void;
+}
+
+export default function useEditFootballShoesItem({
+  onClose,
+}: UseEditFootballShoesItemProps) {
   const queryClient = useQueryClient();
 
   const {
@@ -12,11 +18,16 @@ export default function useEditFootballShoesItem({ onClose }) {
   } = useMutation({
     mutationFn: editFootballShoesItem,
     onSuccess: () => {
-      toast.success("Football Shoes Updated Successfuly");
       queryClient.invalidateQueries({
-        queryKey: ["footballShoes"],
+        queryKey: ["footballshoesDetails"],
       });
       onClose();
+      toast.success("FootballShoes Updated Successfully");
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["footballshoesData"],
+      });
     },
   });
 

@@ -2,7 +2,11 @@ import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
 import { deleteFootballShoesItem } from "../../data/apiFootballShoes";
 
-export default function useDeleteItem({ onClose }) {
+interface UseDeleteItemProps {
+  onClose: () => void;
+}
+
+export default function useDeleteItem({ onClose }: UseDeleteItemProps) {
   const queryClient = useQueryClient();
 
   const {
@@ -12,11 +16,11 @@ export default function useDeleteItem({ onClose }) {
   } = useMutation({
     mutationFn: deleteFootballShoesItem,
     onSuccess: () => {
-      toast.success("Football Shoes Deleted Successfuly");
       queryClient.invalidateQueries({
-        queryKey: ["footballShoes"],
+        queryKey: ["footballshoesData"],
       });
       onClose();
+      toast.success("FootballShoes Deleted Successfully");
     },
   });
 

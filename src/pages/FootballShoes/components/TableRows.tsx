@@ -1,24 +1,34 @@
 import SpinnerLoading from "../../../components/ui/SpinnerLoading";
 import TableItem from "./TableItem";
 import ErrorFounded from "../../../components/ui/ErrorFounded";
-import useGetFootballShoes from "../../../hooks/footballShoesHooks/useGetFootballShoes";
 import NoDataToDisplay from "../../../components/ui/NoDataToDisplay";
+import PageContainer from "../../../components/ui/PageContainer";
+import useGetFootballShoes from "../../../hooks/footballShoesHooks/useGetFootballShoes";
 
 export default function TableRows() {
-  const { isLoading, error, footballShoesData } = useGetFootballShoes();
+  const { isLoading, error, footballshoesData } = useGetFootballShoes();
 
   if (isLoading) {
-    return <SpinnerLoading />;
+    return (
+      <>
+        <SpinnerLoading />;
+      </>
+    );
   }
   if (error) {
-    return <ErrorFounded error={error} />;
+    return (
+      <>
+        <ErrorFounded error={error} />
+      </>
+    );
   }
 
-  if (footballShoesData?.length === 0 || null) {
+  if (footballshoesData?.length === 0 || null) {
     return <NoDataToDisplay />;
   }
+
   return (
-    <>
+    <PageContainer>
       <div className="p-5">
         <div className="relative overflow-x-auto">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -40,13 +50,13 @@ export default function TableRows() {
               </tr>
             </thead>
             <tbody>
-              {footballShoesData?.map((el, index) => (
+              {footballshoesData?.map((el, index) => (
                 <TableItem item={el} key={index} />
               ))}
             </tbody>
           </table>
         </div>
       </div>
-    </>
+    </PageContainer>
   );
 }

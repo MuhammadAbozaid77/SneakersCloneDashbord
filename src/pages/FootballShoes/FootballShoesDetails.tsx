@@ -4,23 +4,29 @@ import SpinnerLoading from "../../components/ui/SpinnerLoading";
 import ErrorFounded from "../../components/ui/ErrorFounded";
 import { FaTrashAlt } from "react-icons/fa";
 import { useState } from "react";
-import useDeleteAnImage from "../../hooks/footballShoesHooks/useDeleteAnImage";
-import useGetFootballShoesDetails from "../../hooks/footballShoesHooks/useGetFootballShoesDetails";
 import EditItemModal from "./components/modal/EditItemModal";
+import { MdAddBox } from "react-icons/md";
+import AddNewImage from "./components/modal/AddNewImage";
+import useGetFootballShoesDetails from "../../hooks/footballShoesHooks/useGetFootballShoesDetails";
+import DetailsData from "./components/DetailsData";
 
+
+type useParamsType = {
+  folderName: string;
+  id: string;
+};
 export default function FootballShoesDetails() {
-  const { folderName, id } = useParams();
-  const [showEditModal, setShowEditModal] = useState(null);
+  const { folderName, id } = useParams<useParamsType>();
+  const [showEditModal, setShowEditModal] = useState<boolean | null>(null);
+  const [showAddNewImage, setShowAddNewImage] = useState<boolean | null>(null);
+  const [showDeleteOnlyImage, setShowDeleteOnlyImage] = useState<
+    boolean | null
+  >(null);
 
   const { isLoading, error, footballShoesDetails } = useGetFootballShoesDetails(
     folderName,
     id
   );
-
-  const { mutateDeleteFootballShoesImage } = useDeleteAnImage();
-  const handelDeleteImage = (imageName) => {
-    mutateDeleteFootballShoesImage({ folderName, imageName });
-  };
 
   if (isLoading) {
     return <SpinnerLoading />;
@@ -34,40 +40,7 @@ export default function FootballShoesDetails() {
         <div className="flex flex-col flex-wrap px-5 gap-5">
           <div className="flex flex-col justify-between">
             <div className="flex justify-center items-start flex-col gap-2">
-              <div className="text-[18px] flex">
-                <span className="px-1 shadow min-w-[150px] bg-gray-200">
-                  Product ID:
-                </span>
-                <span className="mx-2 font-semibold">
-                  {footballShoesDetails?.detailsObject[0]?.id}
-                </span>
-              </div>
-              <div className="text-[18px] flex">
-                <span className="px-1 shadow min-w-[150px] bg-gray-200">
-                  Product Name:
-                </span>
-                <span className="mx-2 font-semibold">
-                  {footballShoesDetails?.detailsObject[0]?.productName}
-                </span>
-              </div>
-              <div className="text-[18px] flex">
-                <span className="px-1 shadow min-w-[150px] bg-gray-200">
-                  Product Price:
-                </span>
-                <span className="mx-2 font-semibold">
-                  {footballShoesDetails?.detailsObject[0]?.productPrice}
-                </span>
-              </div>
-              <div className="text-[18px] flex">
-                <span className="px-1 shadow min-w-[150px] bg-gray-200">
-                  {" "}
-                  Descripition:
-                </span>
-                <span className="mx-2 font-semibold">
-                  {footballShoesDetails?.detailsObject[0]?.productDescripition}
-                </span>
-              </div>
-
+              <DetailsData footballShoesDetails={footballShoesDetails} />
               <div className="flex w-[100%]">
                 <button
                   onClick={() => setShowEditModal(true)}
@@ -83,18 +56,31 @@ export default function FootballShoesDetails() {
               {footballShoesDetails?.imageDetails?.map((el, index) => (
                 <div
                   key={index}
-                  className=" border rounded shadow h-[300px] flex justify-between flex-col"
+                  className=" border rounded shadow  flex justify-between flex-col"
                 >
-                  <img src={el} alt="" className="h-[250px] rounded" />
+                  <img
+                    src={el}
+                    alt=""
+                    className="max-h-[260px] min-h-[250px] rounded"
+                  />
                   <button
-                    onClick={() => handelDeleteImage(el)}
-                    className="flex justify-center items-center bg-red-700 font-semibold hover:bg-red-500 duration-150 text-white p-3 my-1 rounded "
+                    onClick={() => setShowDeleteOnlyImage(el)}
+                    className="m-2 flex justify-center items-center bg-red-700 font-semibold hover:bg-red-500 duration-150 text-white p-3 my-1 rounded "
                   >
                     <FaTrashAlt size={20} />
                     <span className="mx-2 text-[18px]"> Delete</span>
                   </button>
                 </div>
               ))}
+            </div>
+            <div>
+              <button
+                onClick={() => setShowAddNewImage(true)}
+                className="w-[100%] mt-5 flex justify-center items-center bg-gray-500 font-semibold hover:bg-gray-300 duration-150 text-white p-3 my-1 rounded "
+              >
+                <MdAddBox size={30} />
+                <span className="mx-2 text-[18px]"> Add New Image</span>
+              </button>
             </div>
           </div>
         </div>
@@ -106,6 +92,20 @@ export default function FootballShoesDetails() {
           details={footballShoesDetails?.detailsObject[0]}
         />
       )}
+      {showAddNewImage && (
+        <AddNewImage
+          onClose={() => setShowAddNewImage(false)}
+          folderName={footballShoesDetails?.detailsObject[0]?.folderName}
+        />
+      )}
+      {showDeleteOnlyImage && (
+        <DeleteOnlyImage
+          onClose={() => setShowDeleteOnlyImage(false)}
+          folderName={footballShoesDetails?.detailsObject[0]?.folderName}
+          imageName={showDeleteOnlyImage}
+        />
+      )}
     </>
   );
 }
+

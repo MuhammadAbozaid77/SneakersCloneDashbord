@@ -1,6 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import FormInput from "../../../../components/ui/FormInput";
 import useAddNewFootballShoes from "../../../../hooks/footballShoesHooks/useAddNewFootballShoes";
+import { v4 as uuidv4 } from "uuid";
 
 interface AddNewItemProps {
   onClose: () => void;
@@ -15,16 +16,22 @@ interface FormValues {
 }
 
 export default function AddNewItem({ onClose }: AddNewItemProps) {
+  const uniqueId = uuidv4();
   const { isLoading, mutateAddNewFootballShoes } = useAddNewFootballShoes({
     onClose,
   });
+
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<FormValues>();
-  const handelSubmitFun  : SubmitHandler<FormValues>= (values) => {
-    mutateAddNewFootballShoes(values);
+
+  const handelSubmitFun: SubmitHandler<FormValues> = (values) => {
+    mutateAddNewFootballShoes({
+      ...values,
+      folderName: values.folderName + uniqueId,
+    });
   };
 
   return (
@@ -40,7 +47,7 @@ export default function AddNewItem({ onClose }: AddNewItemProps) {
         >
           <div className="border-b my-5  ">
             <h1 className="titleColor p-1 text-[24px] font-bold">
-              Add New FootballShoes
+              Add New Football Shoes
             </h1>
           </div>
           <FormInput label={"ProductName"} error={errors?.productName?.message}>

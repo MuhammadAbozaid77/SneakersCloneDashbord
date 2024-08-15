@@ -4,11 +4,11 @@ import { getFootballShoesData } from "../../data/apiFootballShoes";
 export default function useGetFootballShoes() {
   const {
     isLoading,
-    data: footballShoesData,
+    data: footballshoesData,
     error,
   } = useQuery({
-    queryKey: ["footballShoes"],
+    queryKey: ["footballshoesData"],
     queryFn: getFootballShoesData,
   });
-  return { isLoading, footballShoesData, error };
+  return { isLoading, footballshoesData, error };
 }

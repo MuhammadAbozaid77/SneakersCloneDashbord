@@ -46,7 +46,7 @@ export default function Navigations() {
           />
           <Route path="footballShoes" element={<FootballShoes />} />
           <Route
-            path="footballShoes/footballShoesdetails/:id/:folderName"
+            path="footballShoes/footballShoesDetails/:id/:folderName"
             element={<FootballShoesDetails />}
           />
           <Route path="profile" element={<Profile />} />

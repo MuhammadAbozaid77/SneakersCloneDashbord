@@ -1,5 +1,6 @@
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaGithub } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Header({ setShowSidebar }) {
   const handelShowSidebar = () => {
@@ -15,7 +16,9 @@ export default function Header({ setShowSidebar }) {
       </div>
       <div></div>
       <div className="p-2 border rounded hover:bg-slate-200 duration-150">
-        <FaGithub size={25} />
+        <Link to={"https://github.com/MuhammadAbozaid77"} target="_blank">
+          <FaGithub size={25} />
+        </Link>
       </div>
     </div>
   );

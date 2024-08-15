@@ -11,7 +11,7 @@ export default function TableItem({ item }) {
   const navigate = useNavigate();
   const handelNavigate = () => {
     navigate(
-      `/footballShoes/footballShoesdetails/${item?.id}/${item?.folderName}`
+      `/footballShoes/footballShoesDetails/${item?.id}/${item?.folderName}`
     );
   };
 

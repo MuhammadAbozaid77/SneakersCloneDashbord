@@ -1,8 +1,12 @@
 import toast from "react-hot-toast";
-import { useMutation, useQueryClient } from "react-query";
 import { deleteImageFromFolder } from "../../data/apiFootballShoes";
+import { useMutation, useQueryClient } from "react-query";
 
-export default function useDeleteAnImage() {
+interface UseDeleteAnImageProps {
+  onClose: () => void;
+}
+
+export default function useDeleteAnImage({ onClose }: UseDeleteAnImageProps) {
   const queryClient = useQueryClient();
 
   const {
@@ -12,10 +16,11 @@ export default function useDeleteAnImage() {
   } = useMutation({
     mutationFn: deleteImageFromFolder,
     onSuccess: () => {
-      toast.success("Football Shoes image deleted successfully");
       queryClient.invalidateQueries({
-        queryKey: ["footballShoesDetails"],
+        queryKey: ["footballshoesDetails"],
       });
+      onClose();
+      toast.success("FootballShoes image deleted successfully");
     },
   });
 

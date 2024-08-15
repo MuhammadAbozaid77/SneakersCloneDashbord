@@ -1,10 +1,17 @@
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import useDeleteItem from "../../../../hooks/footballShoesHooks/useDeleteItem";
 
-export default function DeleteItem({ onClose, details }) {
+interface DeleteItemProps {
+  onClose: () => void;
+  details: any; // You should replace `any` with the actual type of `details` if known.
+}
+
+export default function DeleteItem({ onClose, details }: DeleteItemProps) {
   const { isLoading, mutateDeleteFootballShoes } = useDeleteItem({ onClose });
+
   const { handleSubmit } = useForm();
-  const handelSubmitFun = (values) => {
+
+  const handelSubmitFun: SubmitHandler<Record<string, never>> = () => {
     mutateDeleteFootballShoes(details);
   };
 

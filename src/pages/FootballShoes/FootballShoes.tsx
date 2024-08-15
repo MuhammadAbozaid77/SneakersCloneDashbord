@@ -22,12 +22,9 @@ export default function FootballShoes() {
           </div>
         </div>
       </PageContainer>
-      <PageContainer>
-        <TableRows />
-      </PageContainer>
+      <TableRows />
 
       {showAddNew && <AddNewItem onClose={() => setShowAddNew(false)} />}
     </>
   );
 }
-// deleteImageFromFolder

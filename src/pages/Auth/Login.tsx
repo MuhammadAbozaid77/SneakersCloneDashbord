@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import useLogin from "../../hooks/useLogin";
 import FormSpinner from "../../components/ui/FormSpinner";
+import logo from "./../../assets/logo.jpg";
+
 type valuesType = {
   userEmail: string;
   userPassword: string;
@@ -29,6 +31,10 @@ export default function Login() {
             </div>
           )}
           {isLoading && <FormSpinner />}
+
+          <div className="flex justify-center items-center mb-[30px]">
+            <img src={logo} alt="" className="w-[120px]" />
+          </div>
           <div className="flex justify-center items-start flex-col mb-3">
             <label className="font-semibold text-gray-600" htmlFor="UserEmail">
               UserEmail
@@ -67,7 +73,7 @@ export default function Login() {
 
           <button
             type="submit"
-            className="border p-2 my-[20px] w-[100%] rounded-md text-white spinnerColor spinnerHoverColor duration-150 text-[18px]"
+            className="border p-2 my-[20px] w-[100%] rounded-md text-white bg-black spinnerHoverColor duration-150 text-[18px]"
           >
             Login
           </button>
