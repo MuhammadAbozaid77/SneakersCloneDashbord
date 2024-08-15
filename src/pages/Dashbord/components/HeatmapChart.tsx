@@ -1,7 +1,9 @@
 import Chart from "react-apexcharts";
+import { ApexOptions } from "apexcharts";
 
 export default function HeatmapChart() {
-  const options = {
+  // Define the options with ApexOptions type
+  const options: ApexOptions = {
     chart: {
       type: "heatmap",
     },
@@ -47,6 +49,7 @@ export default function HeatmapChart() {
     },
   };
 
+  // Define the series with the correct type
   const series = [
     {
       name: "Jordans",
@@ -66,9 +69,5 @@ export default function HeatmapChart() {
     },
   ];
 
-  return (
-    <>
-      <Chart options={options} series={series} type="heatmap" width="500" />
-    </>
-  );
+  return <Chart options={options} series={series} type="heatmap" width="500" />;
 }

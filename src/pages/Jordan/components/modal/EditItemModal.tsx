@@ -10,7 +10,7 @@ interface EditItemModalProps {
     folderName?: string;
     productPrice?: number;
     productDescripition?: string;
-    id?: string;
+    id: string;
   };
 }
 
