@@ -4,11 +4,11 @@ import { getRunningShoesData } from "../../data/apiRunningShoes";
 export default function useGetRunningShoes() {
   const {
     isLoading,
-    data: runningShoesData,
+    data: runningshoesData,
     error,
   } = useQuery({
-    queryKey: ["sneakers"],
+    queryKey: ["runningshoesData"],
     queryFn: getRunningShoesData,
   });
-  return { isLoading, runningShoesData, error };
+  return { isLoading, runningshoesData, error };
 }

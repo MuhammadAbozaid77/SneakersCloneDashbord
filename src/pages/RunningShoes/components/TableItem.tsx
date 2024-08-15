@@ -2,12 +2,17 @@ import { useNavigate } from "react-router-dom";
 import { FaUserEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 import { useState } from "react";
+import DeleteItem from "./modal/DeleteItem";
+import EditItemModal from "./modal/EditItemModal";
 
 export default function TableItem({ item }) {
-  const [showDeleteModal, setShowDeleteModal] = useState<boolean | null>(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(null);
   const navigate = useNavigate();
   const handelNavigate = () => {
-    navigate(`/jordan/jordandetails/${item?.id}/${item?.folderName}`);
+    navigate(
+      `/runningShoes/runningShoesdetails/${item?.id}/${item?.folderName}`
+    );
   };
 
   return (
@@ -21,21 +26,28 @@ export default function TableItem({ item }) {
           {item?.productName}
         </th>
         <td className="px-6 py-4"> {item?.productPrice}</td>
-        <td className="px-6 py-4 ">
-          <button className="border p-2 rounded-md flex justify-center items-center shadow w-[100px]">
-            <FaUserEdit size={18} className="text-blue-500" />
-            <span className="capitalize  font-semibold mx-1">Edit</span>
+        <td className="px-6 py-4">
+          <button
+            onClick={() => setShowEditModal(true)}
+            className="bg-blue-500 p-2 rounded flex justify-center items-center shadow w-[100px]"
+          >
+            <FaUserEdit size={18} className="text-white" />
+            <span className="capitalize  font-semibold mx-1 text-white">
+              Edit
+            </span>
           </button>
         </td>
-        <td
-          className="px-6 py-4"
-          onClick={() =>
-            setShowDeleteModal({ id: item?.id, folderName: item?.folderName })
-          }
-        >
-          <button className="border p-2 rounded-md flex justify-center items-center shadow w-[100px]">
-            <FaTrashAlt size={18} className="text-red-500" />
-            <span className="capitalize  font-semibold mx-1">delete</span>
+        <td className="px-6 py-4">
+          <button
+            onClick={() =>
+              setShowDeleteModal({ id: item?.id, folderName: item?.folderName })
+            }
+            className="bg-red-500 p-2 rounded flex justify-center items-center shadow w-[100px]"
+          >
+            <FaTrashAlt size={18} className="text-white" />
+            <span className="capitalize text-white font-semibold mx-1">
+              delete
+            </span>
           </button>
         </td>
       </tr>
@@ -45,6 +57,10 @@ export default function TableItem({ item }) {
           onClose={() => setShowDeleteModal(false)}
           details={showDeleteModal}
         />
+      )}
+
+      {showEditModal && (
+        <EditItemModal onClose={() => setShowEditModal(false)} details={item} />
       )}
     </>
   );

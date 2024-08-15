@@ -9,7 +9,9 @@ export default function RunningShoes() {
     <>
       <PageContainer>
         <div className="flex justify-between items-center px-5">
-          <div className="font-bold text-[20px] text-[#062965]"> Running Shoes </div>
+          <div className="font-bold text-[20px] text-[#062965]">
+            Running Shoes
+          </div>
           <div>
             <button
               onClick={() => setShowAddNew(true)}
@@ -20,9 +22,7 @@ export default function RunningShoes() {
           </div>
         </div>
       </PageContainer>
-      <PageContainer>
-        <TableRows />
-      </PageContainer>
+      <TableRows />
 
       {showAddNew && <AddNewItem onClose={() => setShowAddNew(false)} />}
     </>

@@ -1,19 +1,35 @@
+import useGetJordan from "../../../hooks/jordanHooks/useGetJordan";
 import SpinnerLoading from "../../../components/ui/SpinnerLoading";
-import useGetRunningShoes from "../../../hooks/runningShoesHook/useGetRunningShoes";
 import TableItem from "./TableItem";
+import ErrorFounded from "../../../components/ui/ErrorFounded";
+import NoDataToDisplay from "../../../components/ui/NoDataToDisplay";
+import PageContainer from "../../../components/ui/PageContainer";
+import useGetRunningShoes from "../../../hooks/runningShoesHook/useGetRunningShoes";
 
 export default function TableRows() {
-  const { isLoading, error, runningShoesData } = useGetRunningShoes();
+  const { isLoading, error, runningshoesData } = useGetRunningShoes();
 
   if (isLoading) {
-    return <SpinnerLoading />;
+    return (
+      <>
+        <SpinnerLoading />;
+      </>
+    );
   }
   if (error) {
-    <> "Error" </>;
+    return (
+      <>
+        <ErrorFounded error={error} />
+      </>
+    );
+  }
+
+  if (runningshoesData?.length === 0 || null) {
+    return <NoDataToDisplay />;
   }
 
   return (
-    <>
+    <PageContainer>
       <div className="p-5">
         <div className="relative overflow-x-auto">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -35,13 +51,13 @@ export default function TableRows() {
               </tr>
             </thead>
             <tbody>
-              {runningShoesData?.map((el, index) => (
+              {runningshoesData?.map((el, index) => (
                 <TableItem item={el} key={index} />
               ))}
             </tbody>
           </table>
         </div>
       </div>
-    </>
+    </PageContainer>
   );
 }
