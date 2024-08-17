@@ -2,14 +2,14 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import useDeleteAnImage from "../../../../hooks/runningShoesHook/useDeleteAnImage";
 
 interface DeleteOnlyImageProps {
-  folderName: string;  // Prefer using specific types over `any`
-  imageName: string;   // Prefer using specific types over `any`
+  folderName: string | any; // Prefer using specific types over `any`
+  imageName: string | any; // Prefer using specific types over `any`
   onClose: () => void;
 }
 
 interface FormValues {
-  folderName: string;
-  imageName: string;
+  folderName: string | any;
+  imageName: string | any;
 }
 
 export default function DeleteOnlyImage({

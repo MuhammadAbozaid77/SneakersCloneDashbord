@@ -1,15 +1,16 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import useDeleteAnImage from "../../../../hooks/jordanHooks/useDeleteAnImage";
 
-// Define a type for the props with specific types for folderName and imageName
-type DeleteOnlyImageProps = {
+interface DeleteOnlyImageProps {
+  folderName: string | any; // Prefer using specific types over `any`
+  imageName: string | any; // Prefer using specific types over `any`
   onClose: () => void;
-  folderName: string;
-  imageName: string;
-};
+}
 
-// Define an empty type for form values if not used
-type FormValues = {};
+interface FormValues {
+  folderName: string | any;
+  imageName: string | any;
+}
 
 export default function DeleteOnlyImage({
   onClose,

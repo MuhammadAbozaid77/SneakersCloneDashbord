@@ -1,6 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
-import { addNewFootballShoesItem } from "../../data/apiFootballShoes";
+import {
+  addNewFootballShoesItem,
+  AddNewFootballShoesItemParams,
+} from "../../data/apiFootballShoes";
 
 // Define the props type for the hook
 interface UseAddNewFootballShoesProps {
@@ -16,7 +19,7 @@ export default function useAddNewFootballShoes({
     error,
     isLoading,
     mutate: mutateAddNewFootballShoes,
-  } = useMutation({
+  } = useMutation<void, Error, AddNewFootballShoesItemParams>({
     mutationFn: addNewFootballShoesItem,
     onSuccess: () => {
       queryClient.invalidateQueries({

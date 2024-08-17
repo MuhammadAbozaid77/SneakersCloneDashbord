@@ -1,6 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
-import { editFootballShoesItem } from "../../data/apiFootballShoes";
+import {
+  editFootballShoesItem,
+  EditFootballShoesItemParams,
+} from "../../data/apiFootballShoes";
 
 interface UseEditFootballShoesItemProps {
   onClose: () => void;
@@ -15,7 +18,7 @@ export default function useEditFootballShoesItem({
     error,
     isLoading,
     mutate: mutateEditFootballShoesItem,
-  } = useMutation({
+  } = useMutation<void, Error, EditFootballShoesItemParams>({
     mutationFn: editFootballShoesItem,
     onSuccess: () => {
       queryClient.invalidateQueries({

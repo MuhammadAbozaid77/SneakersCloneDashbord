@@ -69,7 +69,7 @@ export async function getFootballShoesDetails(
 }
 
 /* -------------------------------  Create FootballShoes  --------------------------- */
-interface AddNewFootballShoesItemParams {
+export interface AddNewFootballShoesItemParams {
   productImages: FileList;
   folderName: string;
   productName: string;
@@ -114,7 +114,7 @@ export async function createFootballShoesFolderImage(
 }
 
 /* -------------------------------  Delete FootballShoes Item --------------------------- */
-interface DeleteFootballShoesItemParams {
+export interface DeleteFootballShoesItemParams {
   folderName: string;
   id: string;
 }
@@ -169,7 +169,7 @@ export async function deleteImageFromFolder({
 }
 
 /* ----------------------------------- Edit FootballShoes Item Object ---------------------------------------- */
-interface EditFootballShoesItemParams {
+export interface EditFootballShoesItemParams {
   values: Partial<FootballShoesData>;
   id: string;
 }

@@ -1,5 +1,8 @@
 import toast from "react-hot-toast";
-import { deleteImageFromFolder } from "../../data/apiJordan";
+import {
+  deleteImageFromFolder,
+  DeleteImageFromFolderParams,
+} from "../../data/apiJordan";
 import { useMutation, useQueryClient } from "react-query";
 
 interface UseDeleteAnImageProps {
@@ -13,7 +16,7 @@ export default function useDeleteAnImage({ onClose }: UseDeleteAnImageProps) {
     error,
     isLoading,
     mutate: mutateDeleteJordanImage,
-  } = useMutation({
+  } = useMutation<void, Error, DeleteImageFromFolderParams>({
     mutationFn: deleteImageFromFolder,
     onSuccess: () => {
       queryClient.invalidateQueries({
