@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
-import { deleteJordanItem } from "../../data/apiJordan";
+import { deleteJordanItem, DeleteJordanItemParams } from "../../data/apiJordan";
 
 interface UseDeleteItemProps {
   onClose: () => void;
@@ -13,7 +13,7 @@ export default function useDeleteItem({ onClose }: UseDeleteItemProps) {
     error,
     isLoading,
     mutate: mutateDeleteJordan,
-  } = useMutation({
+  } = useMutation<void, Error, DeleteJordanItemParams>({
     mutationFn: deleteJordanItem,
     onSuccess: () => {
       queryClient.invalidateQueries({

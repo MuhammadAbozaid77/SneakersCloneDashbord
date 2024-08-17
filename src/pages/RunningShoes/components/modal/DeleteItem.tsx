@@ -3,10 +3,7 @@ import useDeleteItem from "../../../../hooks/runningShoesHook/useDeleteItem";
 
 interface DeleteItemProps {
   onClose: () => void;
-  details: {
-    folderName: string | any;
-    id: string | any;
-  }; // You should replace `any` with the actual type of `details` if known.
+  details: any; // You should replace `any` with the actual type of `details` if known.
 }
 
 export default function DeleteItem({ onClose, details }: DeleteItemProps) {

@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import { deleteImageFromFolder } from "../../data/apiFootballShoes";
+import { deleteImageFromFolder, DeleteImageFromFolderParams } from "../../data/apiFootballShoes";
 import { useMutation, useQueryClient } from "react-query";
 
 interface UseDeleteAnImageProps {
@@ -13,7 +13,7 @@ export default function useDeleteAnImage({ onClose }: UseDeleteAnImageProps) {
     error,
     isLoading,
     mutate: mutateDeleteFootballShoesImage,
-  } = useMutation({
+  } = useMutation<void, Error, DeleteImageFromFolderParams>({
     mutationFn: deleteImageFromFolder,
     onSuccess: () => {
       queryClient.invalidateQueries({

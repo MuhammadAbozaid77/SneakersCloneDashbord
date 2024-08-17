@@ -146,7 +146,7 @@ export async function deleteFolderImage(folderName: string): Promise<void> {
 }
 
 /* -------------------------------  Delete Image From Folder  --------------------------- */
-interface DeleteImageFromFolderParams {
+export interface DeleteImageFromFolderParams {
   folderName: string;
   imageName: string;
 }

@@ -109,7 +109,7 @@ export async function createJordanFolderImage(
 }
 
 /* -------------------------------  Delete Jordan Item --------------------------- */
-interface DeleteJordanItemParams {
+export interface DeleteJordanItemParams {
   folderName: string;
   id: string;
 }
