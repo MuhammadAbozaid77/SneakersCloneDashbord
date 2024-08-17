@@ -11,23 +11,10 @@ import useGetFootballShoesDetails from "../../hooks/footballShoesHooks/useGetFoo
 import DetailsData from "./components/DetailsData";
 import DeleteOnlyImage from "./components/modal/DeleteOnlyImage";
 
-// Define the types for useParams and the component state
 type useParamsType = {
-  folderName: string;
-  id: string;
+  folderName: string | any;
+  id: string | any;
 };
-
-type FootballShoesDetailsProps = {
-  detailsObject: {
-    id: string;
-    productName: string;
-    folderName: string;
-    productPrice: string;
-    productDescripition: string;
-  }[];
-  imageDetails: string[];
-};
-
 export default function FootballShoesDetails() {
   const { folderName, id } = useParams<keyof useParamsType>() as useParamsType;
   const [showEditModal, setShowEditModal] = useState<boolean>(false);

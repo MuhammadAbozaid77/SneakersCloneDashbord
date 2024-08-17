@@ -1,10 +1,21 @@
 import { useForm } from "react-hook-form";
 import useDeleteAnImage from "../../../../hooks/sneakrsHooks/useDeleteAnImage";
+interface DeleteOnlyImageProps {
+  onClose: () => void;
+  folderName: string | any;
+  imageName: string | any;
+}
 
-export default function DeleteOnlyImage({ onClose, folderName, imageName }) {
+export default function DeleteOnlyImage({
+  onClose,
+  folderName,
+  imageName,
+}: DeleteOnlyImageProps) {
   const { handleSubmit } = useForm();
 
-  const { mutateDeleteSneakersImage, isLoading } = useDeleteAnImage({onClose});
+  const { mutateDeleteSneakersImage, isLoading } = useDeleteAnImage({
+    onClose,
+  });
   const handelDeleteImage = () => {
     mutateDeleteSneakersImage({ folderName, imageName });
   };

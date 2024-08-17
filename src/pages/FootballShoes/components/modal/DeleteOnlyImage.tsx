@@ -3,8 +3,8 @@ import useDeleteAnImage from "../../../../hooks/footballShoesHooks/useDeleteAnIm
 
 type DeleteOnlyImageProps = {
   onClose: () => void;
-  folderName: string;
-  imageName: string;
+  folderName: string | any;
+  imageName: string | any;
 };
 
 export default function DeleteOnlyImage({
