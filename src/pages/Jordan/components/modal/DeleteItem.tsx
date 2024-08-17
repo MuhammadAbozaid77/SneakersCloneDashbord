@@ -3,10 +3,7 @@ import useDeleteItem from "../../../../hooks/jordanHooks/useDeleteItem";
 
 interface DeleteItemProps {
   onClose: () => void;
-  details: {
-    folderName: string | any;
-    id: string | any;
-  };
+  details: any;
 }
 
 export default function DeleteItem({ onClose, details }: DeleteItemProps) {
