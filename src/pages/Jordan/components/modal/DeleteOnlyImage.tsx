@@ -1,29 +1,37 @@
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import useDeleteAnImage from "../../../../hooks/jordanHooks/useDeleteAnImage";
 
+// Define a type for the props with specific types for folderName and imageName
 type DeleteOnlyImageProps = {
   onClose: () => void;
-  folderName: string | any;
-  imageName: string | any;
+  folderName: string;
+  imageName: string;
 };
+
+// Define an empty type for form values if not used
+type FormValues = {};
 
 export default function DeleteOnlyImage({
   onClose,
   folderName,
   imageName,
 }: DeleteOnlyImageProps) {
-  const { handleSubmit } = useForm();
+  // Initialize the form with no specific values
+  const { handleSubmit } = useForm<FormValues>();
 
+  // Get mutation functions and loading state
   const { mutateDeleteJordanImage, isLoading } = useDeleteAnImage({ onClose });
 
-  const handleDeleteImage = () => {
+  // Define the handler for form submission
+  const handleDeleteImage: SubmitHandler<FormValues> = () => {
+    // Pass folderName and imageName to the mutation function
     mutateDeleteJordanImage({ folderName, imageName });
   };
 
   return (
     <div
       onClick={() => onClose()}
-      className="h-[100]vh fixed inset-0 bg-slate-900/70 flex justify-center items-center overflow-y-scroll"
+      className="h-[100vh] fixed inset-0 bg-slate-900/70 flex justify-center items-center overflow-y-scroll"
     >
       <form
         onSubmit={handleSubmit(handleDeleteImage)}
@@ -48,6 +56,7 @@ export default function DeleteOnlyImage({
           Delete
         </button>
         <button
+          type="button"
           disabled={isLoading}
           onClick={() => onClose()}
           className="border p-2 my-[10px] w-[100%] rounded-md text-white bg-red-800 hover:bg-red-500 duration-150 text-[18px]"

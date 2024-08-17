@@ -1,10 +1,15 @@
-import { useForm } from "react-hook-form";
-import useDeleteAnImage from "../../../../hooks/sneakrsHooks/useDeleteAnImage";
+import { useForm, SubmitHandler } from "react-hook-form";
+import useDeleteAnImage from "../../../../hooks/runningShoesHook/useDeleteAnImage";
 
 interface DeleteOnlyImageProps {
   onClose: () => void;
-  folderName: string | any;
-  imageName: string | any;
+  folderName: string;
+  imageName: string;
+}
+
+interface FormValues {
+  folderName: string;
+  imageName: string;
 }
 
 export default function DeleteOnlyImage({
@@ -12,20 +17,21 @@ export default function DeleteOnlyImage({
   folderName,
   imageName,
 }: DeleteOnlyImageProps) {
-  const { handleSubmit } = useForm();
+  const { handleSubmit } = useForm<FormValues>();
 
-  const { mutateDeleteSneakersImage, isLoading } = useDeleteAnImage({
+  const { mutateDeleteRunningShoesImage, isLoading } = useDeleteAnImage({
     onClose,
   });
 
-  const handleDeleteImage = () => {
-    mutateDeleteSneakersImage({ folderName, imageName });
+  // Define the type of the parameters accepted by handleDeleteImage
+  const handleDeleteImage: SubmitHandler<FormValues> = () => {
+    mutateDeleteRunningShoesImage({ folderName, imageName });
   };
 
   return (
     <>
       <div
-        onClick={() => onClose()}
+        onClick={onClose}
         className="h-[100vh] fixed inset-0 bg-slate-900/70 flex justify-center items-center overflow-y-scroll"
       >
         <form
@@ -51,8 +57,9 @@ export default function DeleteOnlyImage({
             Delete
           </button>
           <button
+            type="button"
             disabled={isLoading}
-            onClick={() => onClose()}
+            onClick={onClose}
             className="border p-2 my-[10px] w-[100%] rounded-md text-white bg-red-800 hover:bg-red-500 duration-150 text-[18px]"
           >
             Close
