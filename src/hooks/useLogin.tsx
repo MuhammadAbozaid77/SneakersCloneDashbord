@@ -17,24 +17,21 @@ export interface LoginError {
 export default function useLogin() {
   const navigate = useNavigate();
 
+  // Define mutation result with explicit types
   const mutation: UseMutationResult<LoginResponse, LoginError> = useMutation<
     LoginResponse,
     LoginError
   >({
     mutationFn: loginFunction,
-    onSuccess: (data) => {
+    onSuccess: (data: LoginResponse) => {
       // Save the accessToken to localStorage
       localStorage.setItem("userToken", data.accessToken);
       toast.success("Logged in Successfully");
       navigate("/home");
     },
-    onError: (error) => {
+    onError: (error: LoginError) => {
       // Ensure the error is of type LoginError before accessing its properties
-      if (error && "message" in error) {
-        toast.error(error.message);
-      } else {
-        toast.error("An unknown error occurred");
-      }
+      toast.error(error.message);
     },
   });
 
