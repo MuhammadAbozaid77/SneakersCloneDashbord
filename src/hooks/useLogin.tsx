@@ -1,27 +1,46 @@
-import { useMutation } from "react-query";
+// src/hooks/useLogin.tsx
+
+import { useMutation, UseMutationResult } from "react-query";
 import { loginFunction } from "../data/apiAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-interface LoginResponse {
+// Define the expected response and error types
+export interface LoginResponse {
   accessToken: string;
+}
+
+export interface LoginError {
+  message: string;
 }
 
 export default function useLogin() {
   const navigate = useNavigate();
 
-  const {
-    error,
-    isLoading,
-    mutate: mutateLogin,
-  } = useMutation<LoginResponse, Error>({
+  const mutation: UseMutationResult<LoginResponse, LoginError> = useMutation<
+    LoginResponse,
+    LoginError
+  >({
     mutationFn: loginFunction,
     onSuccess: (data) => {
+      // Save the accessToken to localStorage
       localStorage.setItem("userToken", data.accessToken);
       toast.success("Logged in Successfully");
       navigate("/home");
     },
+    onError: (error) => {
+      // Ensure the error is of type LoginError before accessing its properties
+      if (error && "message" in error) {
+        toast.error(error.message);
+      } else {
+        toast.error("An unknown error occurred");
+      }
+    },
   });
 
-  return { mutateLogin, isLoading, error };
+  return {
+    mutateLogin: mutation.mutate,
+    isLoading: mutation.isLoading,
+    error: mutation.error,
+  };
 }

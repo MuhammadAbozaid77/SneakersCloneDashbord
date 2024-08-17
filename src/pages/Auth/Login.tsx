@@ -29,8 +29,10 @@ export default function Login() {
           className="md:w-[400px] w-[100%] border shadow p-[30px] bg-white rounded-[10px]"
         >
           {error && (
-            <div className="bg-red-500 p-2 text-white mb-[10px] rounded-[5px] ">
-              {error?.message}
+            <div className="bg-red-500 p-2 text-white mb-[10px] rounded-[5px]">
+              {error instanceof Error
+                ? error.message
+                : "An unknown error occurred"}
             </div>
           )}
           {isLoading && <FormSpinner />}
@@ -48,7 +50,7 @@ export default function Login() {
               id="UserEmail"
               {...register("userEmail", { required: "This Email Is Required" })}
             />
-            {errors?.userEmail && (
+            {errors.userEmail && (
               <span className="text-red-500">{errors.userEmail.message}</span>
             )}
           </div>
@@ -67,7 +69,7 @@ export default function Login() {
                 required: "This Password Is Required",
               })}
             />
-            {errors?.userPassword && (
+            {errors.userPassword && (
               <span className="text-red-500">
                 {errors.userPassword.message}
               </span>
