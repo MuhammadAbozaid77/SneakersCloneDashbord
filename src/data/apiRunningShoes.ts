@@ -169,7 +169,7 @@ export async function deleteImageFromFolder({
 }
 
 /* ----------------------------------- Edit RunningShoes Item Object ---------------------------------------- */
-interface EditRunningShoesItemParams {
+export interface EditRunningShoesItemParams {
   values: Partial<RunningShoes>;
   id: string;
 }

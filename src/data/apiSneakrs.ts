@@ -164,7 +164,7 @@ export async function deleteImageFromFolder({
 }
 
 /* ----------------------------------- Edit Jordan Item Object ---------------------------------------- */
-interface EditSneakersItemParams {
+export interface EditSneakersItemParams {
   values: Partial<SneakersData>;
   id: string;
 }

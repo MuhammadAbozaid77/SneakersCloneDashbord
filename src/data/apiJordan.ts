@@ -164,7 +164,7 @@ export async function deleteImageFromFolder({
 }
 
 /* ----------------------------------- Edit Jordan Item Object ---------------------------------------- */
-interface EditJordanItemParams {
+export interface EditJordanItemParams {
   values: Partial<JordanData>;
   id: string;
 }
