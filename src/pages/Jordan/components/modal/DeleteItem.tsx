@@ -4,9 +4,9 @@ import useDeleteItem from "../../../../hooks/jordanHooks/useDeleteItem";
 interface DeleteItemProps {
   onClose: () => void;
   details: {
-    folderName: string;
-    id: string;
-  }; // You should replace `any` with the actual type of `details` if known.
+    folderName: string | any;
+    id: string | any;
+  };
 }
 
 export default function DeleteItem({ onClose, details }: DeleteItemProps) {

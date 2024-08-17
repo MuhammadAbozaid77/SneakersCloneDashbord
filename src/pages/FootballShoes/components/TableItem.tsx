@@ -14,13 +14,13 @@ type itemType = {
   };
 };
 type itemDeleteModal = {
-  id: string;
-  folderName: string;
+  id: string | any;
+  folderName: string | any;
 };
 
 export default function TableItem({ item }: itemType) {
   const [showDeleteModal, setShowDeleteModal] = useState<
-    itemDeleteModal | null | boolean
+    itemDeleteModal | any | boolean
   >(null);
   const [showEditModal, setShowEditModal] = useState<null | boolean>(null);
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import React from "react";
 
 type PropsType = {
   label: string;
-  error?: string;
+  error: any;
   children: React.ReactNode;
 };
 

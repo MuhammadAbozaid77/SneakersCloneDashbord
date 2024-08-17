@@ -1,20 +1,23 @@
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import useLogin from "../../hooks/useLogin";
 import FormSpinner from "../../components/ui/FormSpinner";
 import logo from "./../../assets/logo.jpg";
 
-type valuesType = {
+type ValuesType = {
   userEmail: string;
   userPassword: string;
 };
+
 export default function Login() {
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm();
+  } = useForm<ValuesType>();
+
   const { mutateLogin, isLoading, error } = useLogin();
-  const handelSubmitFun = (values: valuesType) => {
+
+  const handelSubmitFun: SubmitHandler<ValuesType> = (values) => {
     mutateLogin(values);
   };
 
@@ -37,7 +40,7 @@ export default function Login() {
           </div>
           <div className="flex justify-center items-start flex-col mb-3">
             <label className="font-semibold text-gray-600" htmlFor="UserEmail">
-              UserEmail
+              User Email
             </label>
             <input
               className="border p-2 w-[100%] rounded-md text-gray-500 text-[18px]"
@@ -46,7 +49,7 @@ export default function Login() {
               {...register("userEmail", { required: "This Email Is Required" })}
             />
             {errors?.userEmail && (
-              <span className="text-red-500">{errors?.userEmail?.message}</span>
+              <span className="text-red-500">{errors.userEmail.message}</span>
             )}
           </div>
           <div className="flex justify-center items-start flex-col mb-3">
@@ -54,7 +57,7 @@ export default function Login() {
               className="font-semibold text-gray-600"
               htmlFor="UserPassword"
             >
-              UserPassword
+              User Password
             </label>
             <input
               className="border p-2 w-[100%] rounded-md text-gray-500 text-[18px]"
@@ -66,7 +69,7 @@ export default function Login() {
             />
             {errors?.userPassword && (
               <span className="text-red-500">
-                {errors?.userPassword?.message}
+                {errors.userPassword.message}
               </span>
             )}
           </div>

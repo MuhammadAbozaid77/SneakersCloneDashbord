@@ -2,13 +2,29 @@ import { useForm } from "react-hook-form";
 import FormInput from "../../../../components/ui/FormInput";
 import useEditSneakersItem from "../../../../hooks/sneakrsHooks/useEditSneakersItem";
 
-type valuesType = {
+type ValuesType = {
   productName: string;
   folderName: string;
-  productPrice: string;
+  productPrice: number;
   productDescripition: string;
 };
-export default function EditItemModal({ onClose, details }) {
+
+type DetailsType = {
+  productName: string;
+  folderName: string;
+  productPrice: number;
+  productDescripition: string;
+  id: any;
+};
+
+type EditItemModalProps = {
+  onClose: () => void;
+  details: DetailsType | any;
+};
+export default function EditItemModal({
+  onClose,
+  details,
+}: EditItemModalProps) {
   const { isLoading, mutateEditSneakersItem } = useEditSneakersItem({
     onClose,
   });
@@ -25,7 +41,7 @@ export default function EditItemModal({ onClose, details }) {
       //   id: details?.id,
     },
   });
-  const handelSubmitFun = (values: valuesType) => {
+  const handelSubmitFun = (values: ValuesType) => {
     console.log(values);
 
     mutateEditSneakersItem({ values, id: details?.id });
