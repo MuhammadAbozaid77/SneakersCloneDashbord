@@ -69,7 +69,7 @@ export async function getRunningShoesDetails(
 }
 
 /* -------------------------------  Create RunningShoes  --------------------------- */
-interface AddNewRunningShoesItemParams {
+export interface AddNewRunningShoesItemParams {
   productImages: FileList;
   folderName: string;
   productName: string;
@@ -114,7 +114,7 @@ export async function createRunningShoesFolderImage(
 }
 
 /* -------------------------------  Delete RunningShoes Item --------------------------- */
-interface DeleteRunningShoesItemParams {
+export interface DeleteRunningShoesItemParams {
   folderName: string;
   id: string;
 }

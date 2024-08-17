@@ -67,7 +67,7 @@ export async function getSneakersDetails(
 }
 
 /* -------------------------------  Create New Sneakers Item --------------------------- */
-interface AddNewSneakersItemParams {
+export interface AddNewSneakersItemParams {
   productImages: FileList;
   folderName: string;
   productName: string;
