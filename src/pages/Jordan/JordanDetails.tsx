@@ -11,19 +11,18 @@ import AddNewImage from "./components/modal/AddNewImage";
 import DeleteOnlyImage from "./components/modal/DeleteOnlyImage";
 import DetailsData from "./components/DetailsData";
 
-// Define the type for useParams
-type ParamsType = {
-  folderName: string;
-  id: string;
+type useParamsType = {
+  folderName: string | any;
+  id: string | any;
 };
 
 export default function JordanDetails() {
-  const { folderName, id } = useParams<ParamsType>();
+  const { folderName, id } = useParams<useParamsType>();
   const [showEditModal, setShowEditModal] = useState<boolean | null>(null);
   const [showAddNewImage, setShowAddNewImage] = useState<boolean | null>(null);
-  const [showDeleteOnlyImage, setShowDeleteOnlyImage] = useState<string | null>(
-    null
-  );
+  const [showDeleteOnlyImage, setShowDeleteOnlyImage] = useState<
+    boolean | null | any
+  >(null);
 
   const { isLoading, error, jordansDetails } = useGetJordansDetails(
     folderName,

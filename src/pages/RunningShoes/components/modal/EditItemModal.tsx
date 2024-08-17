@@ -19,7 +19,7 @@ type DetailsType = {
 
 type EditItemModalProps = {
   onClose: () => void;
-  details: DetailsType | null;
+  details: DetailsType | any;
 };
 
 export default function EditItemModal({

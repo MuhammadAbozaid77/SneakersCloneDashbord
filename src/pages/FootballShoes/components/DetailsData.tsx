@@ -1,4 +1,21 @@
-export default function DetailsData({ footballShoesDetails }) {
+type DetailsObject = {
+  id: string;
+  productName: string;
+  productPrice: string;
+  productDescripition: string;
+};
+
+type FoootballShoesDetailsType = {
+  detailsObject: DetailsObject[];
+};
+
+type DetailsDataProps = {
+  footballShoesDetails: FoootballShoesDetailsType | any;
+};
+
+export default function DetailsData({
+  footballShoesDetails,
+}: DetailsDataProps) {
   return (
     <>
       <div className="text-[18px] flex">

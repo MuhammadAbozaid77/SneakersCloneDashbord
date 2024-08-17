@@ -2,23 +2,24 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import FormInput from "../../../../components/ui/FormInput";
 import useEditJordanItem from "../../../../hooks/jordanHooks/useEditJordanItem";
 
-// Define the types for the component props
-interface EditItemModalProps {
-  onClose: () => void;
-  details: {
-    productName?: string;
-    folderName?: string;
-    productPrice?: number;
-    productDescripition?: string;
-    id: string;
-  };
-}
-
-type FormValues = {
+type ValuesType = {
   productName: string;
   folderName: string;
   productPrice: number;
   productDescripition: string;
+};
+
+type DetailsType = {
+  productName: string;
+  folderName: string;
+  productPrice: number;
+  productDescripition: string;
+  id: any;
+};
+
+type EditItemModalProps = {
+  onClose: () => void;
+  details: DetailsType | any;
 };
 
 export default function EditItemModal({
@@ -31,7 +32,7 @@ export default function EditItemModal({
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm<ValuesType>({
     defaultValues: {
       productName: details?.productName || "",
       folderName: details?.folderName || "",
@@ -40,7 +41,7 @@ export default function EditItemModal({
     },
   });
 
-  const handleSubmitFun: SubmitHandler<FormValues> = (values) => {
+  const handleSubmitFun: SubmitHandler<ValuesType> = (values) => {
     mutateEditJordanItem({ values, id: details?.id });
   };
 

@@ -10,7 +10,7 @@ type JordansDetailsType = {
 };
 
 type DetailsDataProps = {
-  jordansDetails: JordansDetailsType;
+  jordansDetails: JordansDetailsType | any;
 };
 
 export default function DetailsData({ jordansDetails }: DetailsDataProps) {

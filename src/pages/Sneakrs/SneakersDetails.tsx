@@ -12,15 +12,15 @@ import AddNewImage from "./components/modal/AddNewImage";
 import DeleteOnlyImage from "./components/modal/DeleteOnlyImage";
 
 type useParamsType = {
-  folderName: string;
-  id: string;
+  folderName: string | any;
+  id: string | any;
 };
 export default function SneakersDetails() {
   const { folderName, id } = useParams<useParamsType>();
   const [showEditModal, setShowEditModal] = useState<boolean | null>(null);
   const [showAddNewImage, setShowAddNewImage] = useState<boolean | null>(null);
   const [showDeleteOnlyImage, setShowDeleteOnlyImage] = useState<
-    boolean | null
+    boolean | null | any
   >(null);
 
   const { isLoading, error, sneakersDetails } = useGetSneakersDetails(

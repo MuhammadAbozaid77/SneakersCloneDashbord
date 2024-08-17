@@ -3,8 +3,8 @@ import useDeleteAnImage from "../../../../hooks/jordanHooks/useDeleteAnImage";
 
 type DeleteOnlyImageProps = {
   onClose: () => void;
-  folderName: string;
-  imageName: string;
+  folderName: string | any;
+  imageName: string | any;
 };
 
 export default function DeleteOnlyImage({

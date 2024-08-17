@@ -4,12 +4,12 @@ import useAddNewImage from "../../../../hooks/sneakrsHooks/useAddNewImage";
 
 interface AddNewItemProps {
   onClose: () => void;
-  folderName: string;
+  folderName: string | any;
 }
 
 interface FormValues {
   productImages: FileList;
-  folderName: string;
+  folderName: string | any;
 }
 
 export default function AddNewImage({ onClose, folderName }: AddNewItemProps) {
