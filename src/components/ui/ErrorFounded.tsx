@@ -1,5 +1,5 @@
 type errorType = {
-  error: string;
+  error: any;
 };
 
 export default function ErrorFounded({ error }: errorType) {

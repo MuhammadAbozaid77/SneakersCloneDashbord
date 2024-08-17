@@ -9,19 +9,32 @@ import { MdAddBox } from "react-icons/md";
 import AddNewImage from "./components/modal/AddNewImage";
 import useGetFootballShoesDetails from "../../hooks/footballShoesHooks/useGetFootballShoesDetails";
 import DetailsData from "./components/DetailsData";
+import DeleteOnlyImage from "./components/modal/DeleteOnlyImage";
 
-
+// Define the types for useParams and the component state
 type useParamsType = {
   folderName: string;
   id: string;
 };
+
+type FootballShoesDetailsProps = {
+  detailsObject: {
+    id: string;
+    productName: string;
+    folderName: string;
+    productPrice: string;
+    productDescripition: string;
+  }[];
+  imageDetails: string[];
+};
+
 export default function FootballShoesDetails() {
-  const { folderName, id } = useParams<useParamsType>();
-  const [showEditModal, setShowEditModal] = useState<boolean | null>(null);
-  const [showAddNewImage, setShowAddNewImage] = useState<boolean | null>(null);
-  const [showDeleteOnlyImage, setShowDeleteOnlyImage] = useState<
-    boolean | null
-  >(null);
+  const { folderName, id } = useParams<keyof useParamsType>() as useParamsType;
+  const [showEditModal, setShowEditModal] = useState<boolean>(false);
+  const [showAddNewImage, setShowAddNewImage] = useState<boolean>(false);
+  const [showDeleteOnlyImage, setShowDeleteOnlyImage] = useState<string | null>(
+    null
+  );
 
   const { isLoading, error, footballShoesDetails } = useGetFootballShoesDetails(
     folderName,
@@ -86,26 +99,25 @@ export default function FootballShoesDetails() {
         </div>
       </PageContainer>
 
-      {showEditModal && (
+      {showEditModal && footballShoesDetails && (
         <EditItemModal
           onClose={() => setShowEditModal(false)}
-          details={footballShoesDetails?.detailsObject[0]}
+          details={footballShoesDetails.detailsObject[0]}
         />
       )}
-      {showAddNewImage && (
+      {showAddNewImage && footballShoesDetails && (
         <AddNewImage
           onClose={() => setShowAddNewImage(false)}
-          folderName={footballShoesDetails?.detailsObject[0]?.folderName}
+          folderName={footballShoesDetails.detailsObject[0]?.folderName}
         />
       )}
-      {showDeleteOnlyImage && (
+      {showDeleteOnlyImage && footballShoesDetails && (
         <DeleteOnlyImage
-          onClose={() => setShowDeleteOnlyImage(false)}
-          folderName={footballShoesDetails?.detailsObject[0]?.folderName}
+          onClose={() => setShowDeleteOnlyImage(null)}
+          folderName={footballShoesDetails.detailsObject[0]?.folderName}
           imageName={showDeleteOnlyImage}
         />
       )}
     </>
   );
 }
-

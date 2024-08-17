@@ -1,4 +1,19 @@
-export default function DetailsData({ jordansDetails }) {
+type DetailsObject = {
+  id: string;
+  productName: string;
+  productPrice: string;
+  productDescripition: string;
+};
+
+type JordansDetailsType = {
+  detailsObject: DetailsObject[];
+};
+
+type DetailsDataProps = {
+  jordansDetails: JordansDetailsType;
+};
+
+export default function DetailsData({ jordansDetails }: DetailsDataProps) {
   return (
     <>
       <div className="text-[18px] flex">
@@ -27,7 +42,6 @@ export default function DetailsData({ jordansDetails }) {
       </div>
       <div className="text-[18px] flex">
         <span className="px-1 shadow min-w-[150px] bg-gray-200">
-          {" "}
           Descripition:
         </span>
         <span className="mx-2 font-semibold">
