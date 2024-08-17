@@ -1,4 +1,3 @@
-import useGetJordan from "../../../hooks/jordanHooks/useGetJordan";
 import SpinnerLoading from "../../../components/ui/SpinnerLoading";
 import TableItem from "./TableItem";
 import ErrorFounded from "../../../components/ui/ErrorFounded";

@@ -1,9 +1,21 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import FormInput from "../../../../components/ui/FormInput";
 import useAddNewSneakrs from "../../../../hooks/sneakrsHooks/useAddNewSneakrs";
 import { v4 as uuidv4 } from "uuid";
 
-export default function AddNewItem({ onClose }) {
+interface AddNewItemProps {
+  onClose: () => void;
+}
+
+interface FormValues {
+  productName: string;
+  folderName: string;
+  productPrice: number;
+  productDescripition: string;
+  productImages: FileList;
+}
+
+export default function AddNewItem({ onClose }: AddNewItemProps) {
   const uniqueId = uuidv4();
 
   const { isLoading, mutateAddNewSneakers } = useAddNewSneakrs({ onClose });
@@ -12,8 +24,8 @@ export default function AddNewItem({ onClose }) {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm();
-  const handelSubmitFun = (values) => {
+  } = useForm<FormValues>();
+  const handelSubmitFun: SubmitHandler<FormValues> = (values) => {
     mutateAddNewSneakers({
       ...values,
       folderName: values.folderName + uniqueId,
