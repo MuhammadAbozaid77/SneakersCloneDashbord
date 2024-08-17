@@ -1,7 +1,5 @@
-// src/hooks/useLogin.tsx
-
-import { useMutation } from "react-query";
-import { loginFunction } from "../data/apiAuth";
+import { useMutation, UseMutationResult } from "react-query";
+import { loginFunction, LoginArgs } from "../data/apiAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -14,30 +12,32 @@ export interface LoginError {
   message: string;
 }
 
-export default function useLogin() {
+export default function useLogin(): UseMutationResult<
+  LoginResponse,
+  LoginError,
+  LoginArgs
+> {
   const navigate = useNavigate();
 
-  const mutation = useMutation<
-    LoginResponse,
-    LoginError,
-    { userEmail: string; userPassword: string }
-  >({
-    mutationFn: loginFunction,
+  const mutation = useMutation<LoginResponse, LoginError, LoginArgs>({
+    mutationFn: async (args) => {
+      const user = await loginFunction(args);
+      if (user) {
+        // Assuming you have a method to generate an access token
+        const accessToken = "yourAccessTokenGenerationLogic";
+        return { accessToken };
+      }
+      throw new Error("Invalid user data");
+    },
     onSuccess: (data: LoginResponse) => {
-      // Save the accessToken to localStorage
       localStorage.setItem("userToken", data.accessToken);
       toast.success("Logged in Successfully");
       navigate("/home");
     },
     onError: (error: LoginError) => {
-      // Ensure the error is of type LoginError before accessing its properties
       toast.error(error.message);
     },
   });
 
-  return {
-    mutateLogin: mutation.mutate,
-    isLoading: mutation.isLoading,
-    error: mutation.error,
-  };
+  return mutation;
 }

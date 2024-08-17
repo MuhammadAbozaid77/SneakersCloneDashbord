@@ -15,10 +15,10 @@ export default function Login() {
     formState: { errors },
   } = useForm<ValuesType>();
 
-  const { mutateLogin, isLoading, error } = useLogin();
+  const { mutate, isLoading, error } = useLogin(); // Note: it's `mutate`, not `mutateLogin`
 
   const handelSubmitFun: SubmitHandler<ValuesType> = (values) => {
-    mutateLogin(values);
+    mutate(values);
   };
 
   return (

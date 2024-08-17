@@ -2,9 +2,9 @@ import { signInWithEmailAndPassword, User } from "firebase/auth";
 import { appAuth } from "./firebaseConfig";
 
 // Define the type for the login function arguments
-interface LoginArgs {
-  userEmail: string;
-  userPassword: string;
+export interface LoginArgs {
+  userEmail: string | any;
+  userPassword: string | any;
 }
 
 //----------------------------------------------------
