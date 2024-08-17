@@ -1,6 +1,6 @@
 // src/hooks/useLogin.tsx
 
-import { useMutation, UseMutationResult } from "react-query";
+import { useMutation } from "react-query";
 import { loginFunction } from "../data/apiAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -17,10 +17,10 @@ export interface LoginError {
 export default function useLogin() {
   const navigate = useNavigate();
 
-  // Define mutation result with explicit types
-  const mutation: UseMutationResult<LoginResponse, LoginError> = useMutation<
+  const mutation = useMutation<
     LoginResponse,
-    LoginError
+    LoginError,
+    { userEmail: string; userPassword: string }
   >({
     mutationFn: loginFunction,
     onSuccess: (data: LoginResponse) => {
