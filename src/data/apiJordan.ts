@@ -67,7 +67,7 @@ export async function getJordanDetails(
 }
 
 /* -------------------------------  Create Jordan  --------------------------- */
-interface AddNewJordanItemParams {
+export interface AddNewJordanItemParams {
   productImages: FileList;
   folderName: string;
   productName: string;
