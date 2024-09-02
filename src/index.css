@@ -5,8 +5,10 @@
 @tailwind utilities;
 
 .navLinkes .active {
-  background-color: #e0e0e0;
+  background-color: black;
+  color: white;
 }
+
 .navLinkesResponsive .active {
   background-color: #003a91;
   color: white;
@@ -28,8 +30,4 @@ body {
 }
 .titleColorBack {
   background-color: #062965;
-}
-
-.darkBlue {
-  background-color: #020f25;
 }

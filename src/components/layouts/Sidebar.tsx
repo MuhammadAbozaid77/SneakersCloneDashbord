@@ -15,15 +15,15 @@ export default function Sidebar() {
       <div className="w-[350px] lg:flex justify-between flex-col hidden bg-white h-[100%] overflow-y-auto border-r">
         <div>
           <LogoCompo />
-          <ul className="">
+          <ul className="mt-[8px]">
             {sidebarNav.map((el, index) => (
               <li
-                className="border-b bg-white navLinkes duration-150 hover:bg-slate-200"
+                className=" bg-white navLinkes duration-150 hover:bg-slate-200"
                 key={index}
               >
                 <NavLink
                   to={el.path}
-                  className="font-semibold block p-3 text-slate-600"
+                  className="font-semibold block p-3 text-slate-600 rounded-md mx-[5px] "
                 >
                   {el.name}
                 </NavLink>
@@ -44,11 +44,11 @@ export default function Sidebar() {
             </li>
 
             <li
-              className="darkBlue  text-white navLinkes flex justify-start items-center  p-3"
+              className="bg-white text-black border flex justify-start items-center  p-3"
               onClick={handelLogout}
             >
               <LuLogOut size={30} />
-              <span className="font-semibold block mx-2 text-[18px]">
+              <span className="font-semibold block mx-2 text-[18px] ">
                 Logout
               </span>
             </li>

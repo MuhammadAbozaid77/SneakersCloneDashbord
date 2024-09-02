@@ -4,7 +4,8 @@ type propsType = {
 };
 
 export default function ProtectedRouting({ children }: propsType) {
-  const userToken = localStorage.getItem("userToken");
+  const userToken = "ttt";
+  // const userToken = localStorage.getItem("userToken");
   if (userToken) {
     return children;
   } else {

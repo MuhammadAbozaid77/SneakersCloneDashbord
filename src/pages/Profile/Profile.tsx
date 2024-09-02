@@ -1,6 +1,6 @@
 import PageContainer from "../../components/ui/PageContainer";
 import { FaCircleUser } from "react-icons/fa6";
-import { IoMdLogOut } from "react-icons/io";
+import { LuLogOut } from "react-icons/lu";
 import useLogout from "../../hooks/useLogout";
 import { appAuth } from "../../data/firebaseConfig";
 
@@ -22,7 +22,7 @@ export default function Profile() {
       <PageContainer>
         <div className="flex justify-between items-center p-5 flex-col gap-5">
           <div>
-            <FaCircleUser size={150} className="text-[#062965]" />
+            <FaCircleUser size={150} className="text-black" />
           </div>
           <div>
             <div className="font-bold text-[25px]  text-gray-600">
@@ -35,9 +35,9 @@ export default function Profile() {
           <div>
             <button
               onClick={handelLogout}
-              className="bg-red-700 text-white font-bold p-2 w-[100px] rounded flex justify-center items-center"
+              className="bg-red-700 text-white font-bold p-2 w-[120px] rounded flex justify-center items-center"
             >
-              <IoMdLogOut color="white" size={30} />
+              <LuLogOut color="white" size={30} />
               <span className="mx-2"> Logout </span>
             </button>
           </div>

@@ -7,4 +7,3 @@ export default function RoutesProvider({ children }: propsType) {
   return <HashRouter>{children}</HashRouter>;
 }
 
-// return <HashRouter hashType="hashbang">{children}</HashRouter>;

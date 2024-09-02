@@ -25,13 +25,13 @@ export default function Login() {
   return (
     <>
       <div className="relative flex justify-center items-center h-[100vh] bg-gray-100">
-        <div className="flex justify-center items-center h-[100%] w-[100%]">
+        <div className="lg:flex justify-center items-center h-[100%] w-[100%] hidden">
           <img src={picc} alt="" className="h-[100%] w-[100%]" />
         </div>
-        <div className="w-[100%] bg-black/90 h-[100%] flex justify-center items-center">
+        <div className="w-[100%] bg-black/90 h-[100%] flex justify-center items-center p-5">
           <form
             onSubmit={handleSubmit(handelSubmitFun)}
-            className="relative z-10 min-h-[500px]: md:w-[500px] w-[100%] border shadow p-[30px] bg-white rounded-[10px]"
+            className="relative z-10 md-h-[500px] h-auto md:w-[500px]  w-[100%] border shadow p-[30px] bg-white rounded-[10px]"
           >
             {error && (
               <div className="bg-red-500 p-2 text-white mb-[10px] rounded-[5px]">
