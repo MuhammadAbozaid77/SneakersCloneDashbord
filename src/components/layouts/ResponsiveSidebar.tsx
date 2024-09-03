@@ -4,7 +4,6 @@ import useLogout from "../../hooks/useLogout";
 import LogoCompo from "./LogoCompo";
 import { LuLogOut } from "react-icons/lu";
 import { FaCircleUser } from "react-icons/fa6";
-import { BsChevronDoubleLeft } from "react-icons/bs";
 import { CgClose } from "react-icons/cg";
 
 // Define the type for the props
@@ -63,8 +62,8 @@ export default function ResponsiveSidebar({ setShowSidebar }: HeaderProps) {
               </li>
 
               <li
-              className="bg-white text-black border navLinkes flex justify-start items-center  p-3"
-              onClick={handelLogout}
+                className="bg-white text-black border navLinkes flex justify-start items-center  p-3"
+                onClick={handelLogout}
               >
                 <LuLogOut size={30} />
                 <span className="font-semibold block mx-2 text-[18px]">
